@@ -41,6 +41,7 @@ app.use(cors({credentials:true,origin:process.env.FRONTEND,methods:["GET","POST"
 // Attach io to the app to make it available in routes
 app.set('io', io);
 
+
 // routes
 app.use("/api/users",userRoute)
 app.use("/api/cart",cartRoute)
