@@ -36,6 +36,7 @@ app.use(express.urlencoded({extended:true}))
 // Add cookie-parser and bodyparser middleware
 app.use(cookieParser())
 app.use(bodyParser.json())
+<<<<<<< HEAD
 const allowedOrigins = [process.env.FRONTEND_URL ,process.env.ADMIN_URL ]
 app.use(cors({
   credentials: true,
@@ -57,8 +58,13 @@ app.use(cors({
 // app.use(cors({ credentials: true, origin: "*" }));
 
 
+=======
+app.use(cors({credentials:true,origin:process.env.FRONTEND,methods:["GET","POST","PUT","DELETE","PATCH"]}));
+// app.use(cors());
+>>>>>>> 7013e96904deff77127964650680ec9a1fd72479
 // Attach io to the app to make it available in routes
 app.set('io', io);
+
 
 // routes
 app.use("/api/users",userRoute)
@@ -74,6 +80,9 @@ app.use("/api",invoiceRoute)
 app.use("/api",subscribeRoute)
 app.use("/api/wishlist",wishlistRoute)
 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 // Handle client connections with Socket.io
 io.on("connection",(socket)=>{
   console.log("User Connected.")
