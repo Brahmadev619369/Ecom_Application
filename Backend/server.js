@@ -36,7 +36,26 @@ app.use(express.urlencoded({extended:true}))
 // Add cookie-parser and bodyparser middleware
 app.use(cookieParser())
 app.use(bodyParser.json())
-app.use(cors({credentials:true,origin:process.env.FRONTEND,methods:["GET","POST","PUT","DELETE","PATCH"]}));
+const allowedOrigins = [process.env.FRONTEND_URL ,process.env.ADMIN_URL ]
+app.use(cors({
+  credentials: true,
+  origin: function (origin, callback) {
+    console.log("Incoming request origin:", origin);
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.error("Blocked by CORS:", origin);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  // allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
+
+// app.use(cors({ credentials: true, origin: "*" }));
+
 
 // Attach io to the app to make it available in routes
 app.set('io', io);
