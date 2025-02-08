@@ -36,8 +36,8 @@ app.use(express.urlencoded({extended:true}))
 // Add cookie-parser and bodyparser middleware
 app.use(cookieParser())
 app.use(bodyParser.json())
-app.use(cors({credentials:true,origin:process.env.FRONTEND,methods:["GET","POST","PUT","DELETE","PATCH"]}));
-
+// app.use(cors({credentials:true,origin:process.env.FRONTEND,methods:["GET","POST","PUT","DELETE","PATCH"]}));
+app.use(cors());
 // Attach io to the app to make it available in routes
 app.set('io', io);
 
