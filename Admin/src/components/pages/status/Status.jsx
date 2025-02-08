@@ -3,7 +3,7 @@ import { Html5QrcodeScanner } from 'html5-qrcode';
 import axios from 'axios';
 import "./status.css"
 import { storeContext } from '../../context/context';
-import OrdersDetails from '../orders/ordersDetails';
+import OrdersDetails from '../orders/OrdersDetails';
 import { ToastContainer, toast } from 'react-toastify';
 
 function Status() {
