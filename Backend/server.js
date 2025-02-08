@@ -36,7 +36,7 @@ app.use(express.urlencoded({extended:true}))
 // Add cookie-parser and bodyparser middleware
 app.use(cookieParser())
 app.use(bodyParser.json())
-const allowedOrigins = [process.env.FRONTEND_URL ,process.env.ADMIN_URL,process.env.FRONTEND_GIT ]
+const allowedOrigins = [process.env.FRONTEND_URL ,process.env.ADMIN_URL,process.env.FRONTEND_GIT ,process.env.PHONE_DUMMY,process.env.PHONEPE_HOST_URL ]
 app.use(cors({
   credentials: true,
   origin: function (origin, callback) {
