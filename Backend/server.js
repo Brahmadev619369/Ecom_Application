@@ -51,17 +51,11 @@ app.use(cors({
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  // allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 
 // app.use(cors({ credentials: true, origin: "*" }));
 
-
-=======
-app.use(cors({credentials:true,origin:process.env.FRONTEND,methods:["GET","POST","PUT","DELETE","PATCH"]}));
-// app.use(cors());
->>>>>>> 7013e96904deff77127964650680ec9a1fd72479
 // Attach io to the app to make it available in routes
 app.set('io', io);
 
