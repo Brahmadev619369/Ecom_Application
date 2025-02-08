@@ -1,0 +1,154 @@
+.scannerContainer{
+    margin: 10px 0;
+    padding: 10px;
+    background-color: rgb(250, 250, 250);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
+}
+.scanner{
+    border-radius: 10px;
+}
+
+.scanner button{
+    background-color: coral;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+.scanner button:hover{
+    background-color: rgb(249, 66, 0);
+
+}
+
+.statusMainContainer h3 {
+    text-align: center;
+    margin: 10px 0;
+
+
+}
+
+.order-details{
+    margin: 20px 0;
+    background-color: rgb(250, 250, 250);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    padding: 10px;
+}
+
+.order-details .headDetails{
+    margin: 20px 0;
+}
+
+.order-details .headDetails .someInfo{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 300px;
+}
+
+.order-details .headDetails .someInfo span{
+    font-weight: 600;
+}
+.detailsContainer .details{
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px 0;
+}
+.detailsContainer .details .detailsCard{
+    background-color: rgb(247, 245, 245);
+    padding: 10px;
+    border-radius: 5px;
+    width: 180px;
+}
+.detailsContainer{
+    background-color: white;
+    width: 80%;
+    margin: auto;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.detailsContainer h4{
+    font-weight: 600;
+    text-align: center;
+    
+}
+.detailsContainer .details .detailsCard .img{
+    height: 150px;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.detailsContainer .details .detailsCard .img img{
+
+    height: 150px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.detailsContainer .details .detailsCard .name{
+    margin: 10px 0;
+    font-weight: 600
+}
+
+.detailsContainer .details .detailsCard .name p{
+    font-weight: 600
+}
+.detailsContainer .details .detailsCard .sizeQty{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+}
+
+.detailsContainer .details .detailsCard .sizeQty p{
+    font-size: 0.9rem;
+}
+
+.order-update{
+    margin: 20px 0;
+    background-color: rgb(250, 250, 250);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    padding: 10px;
+}
+
+.selectStatus,.otpContainer{
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectStatus select{
+    padding: 5px 10px;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.selectStatus button,.otpContainer button{
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color: coral;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.selectStatus button:hover,.otpContainer button:hover{
+    background-color: crimson;
+}
+
+.otpContainer input{
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    outline: none;
+}

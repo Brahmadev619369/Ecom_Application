@@ -1,0 +1,165 @@
+.productCard{
+    display: flex;
+    flex-direction: column;
+    /* width: 180px; */
+    height:300px ;
+    /* border: 1px solid rgb(209, 204, 204); */
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow 0.3s ease-in-out;
+    text-align: left;
+}
+
+.outOfStockOverlay1{
+    position: absolute;
+    z-index: 10;
+    height: 200px;
+    width: 180px;
+    backdrop-filter: blur(1px);
+    top: 0;
+    left: 0;
+}
+
+.outOfStock1{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.outOfStock1 p{
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: brown;
+}
+
+.productImg{
+    height: 200px;
+    width: 180px;
+    position: relative;
+}
+
+.productImg img{
+    height: 200px;
+    width: 180px;
+    object-fit:contain;
+    transition: object-fit 0.3s ease-in-out;
+}
+
+.productName ,.productPrice{
+    max-width: 180px;
+}
+.productPrice{
+    color: cadetblue;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.productCard:hover{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-radius: 5px;
+}
+
+.productCard:hover .productImg img{
+    object-fit:cover;
+}
+
+.productName{
+    font-size: 14px;
+    margin: 5px 0;
+    height: 42px;
+}
+
+.priceContainer{
+    /* text-align: left; */
+    width: 180px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-self: center;
+    margin: 0 3px;
+}
+.productPrice{
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    font-weight: 600;
+    
+}
+
+.Off{
+    color: green;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.lineThroughPrice{
+    text-decoration: line-through;
+    color: gray;
+    font-size: 15px;
+}
+@media (max-width:480px) {
+
+    .productCard{
+        width: 150px;
+        height:300px ;
+    }
+    
+    .productImg{
+        height: 200px;
+        width: 150px;
+    }
+    
+    .productImg img{
+        height: 200px;
+        width: 150px;
+    }
+
+    .outOfStockOverlay1{
+        height: 200px;
+        width: 150px;
+
+    }
+    
+    
+    
+    .productName ,.productPrice{
+        max-width: 150px;
+    }
+    
+    
+    .priceContainer{
+        width: 150px;
+    }
+
+
+    .productName{
+        font-size: 13px;
+        margin: 4px 2px;
+        height: 39px;
+    }
+
+    .productPrice{
+        font-size: 14px;
+        font-weight: 600;
+        
+    }
+
+    .Off{
+        font-size: 14px;
+    }
+    
+    .lineThroughPrice{
+        font-size: 14px;
+    }
+
+    .productCard{
+        box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+        border-radius: 5px;
+    }
+}
+
+
+

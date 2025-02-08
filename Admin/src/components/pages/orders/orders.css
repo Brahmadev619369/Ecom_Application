@@ -1,0 +1,170 @@
+.OrdersContainer{
+    margin-bottom: 20px;
+    min-height: 65vh;
+}
+
+.ordersCards{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+
+.ordersCards .ordersCard{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    gap: 10px;
+    height: 150px;
+    width: 80vw;
+    margin: auto;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 10px;
+    transition: background-color 0.3s;
+}
+.ordersCard:hover{
+    background-color: rgb(243, 243, 243);
+}
+.ordersCards .ordersCard .img{
+    height: 150px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.ordersCards .ordersCard .img .overlayImg{
+    background-color: rgb(239, 161, 161);
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 10px;
+    position: absolute;
+    bottom: 10px;
+    
+}
+.ordersCards .ordersCard img{
+    height: 140px;
+    border-radius: 5px;
+}
+
+.ordersCards .ordersCard .nameAndOther{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+}
+.ordersCards .ordersCard .nameAndOther .names{
+    font-weight: 600;
+}
+.ordersCards .ordersCard .nameAndOther .overlayName{
+    font-weight: 600;
+    background-color: gray;
+    width: 70px;
+    padding: 2px 5px;
+    border-radius: 2px 5px;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+}
+
+.ordersCards .ordersCard .price{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.ordersCards .ordersCard .status{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.orderDelivered{
+    color: green;
+}
+
+
+@media (max-width:570px) {
+    .ordersCards .ordersCard  p{
+        font-size: 12px;
+    }
+
+    .ordersCards .ordersCard .nameAndOther .overlayName{
+        width: 50px;
+        padding: 2px 3px;
+        font-size: 11px;
+    }
+
+    .ordersCards .ordersCard{
+        height: 110px;
+        padding: 0 10px;
+    }
+
+    .ordersCards .ordersCard .img{
+        height: 110px;
+        align-items: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    .ordersCards .ordersCard .img .overlayImg{
+        background-color: rgb(239, 161, 161);
+        padding: 5px;
+        border-radius: 10px;
+        font-size: 10px;
+        position: absolute;
+        bottom: 10px;
+        
+    }
+    .ordersCards .ordersCard img{
+        height: 100px;
+        border-radius: 5px;
+    }
+
+    .ordersCards .ordersCard{
+        width: 70vw}
+}
+
+@media (max-width:420px) {
+    .ordersCards .ordersCard  p{
+        font-size: 10px;
+    }
+
+    .ordersCards .ordersCard .nameAndOther .overlayName{
+        width: 42px;
+        padding: 2px 3px;
+        font-size: 9px;
+    }
+
+    .ordersCards .ordersCard{
+        height: 115px;
+        padding: 0 5px;
+    }
+
+    .ordersCards .ordersCard .img{
+        height: 115px;
+        align-items: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    .ordersCards .ordersCard .img .overlayImg{
+        background-color: rgb(239, 161, 161);
+        padding: 3px 5px;
+        border-radius: 10px;
+        font-size: 8px;
+        position: absolute;
+        bottom: 10px;
+        
+    }
+    .ordersCards .ordersCard img{
+        height: 105px;
+        border-radius: 5px;
+    }
+}

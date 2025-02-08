@@ -1,0 +1,72 @@
+.ConfirmMessage-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.Confitm-container{
+background-color: transparent;
+backdrop-filter: blur(10px);
+margin: auto;
+padding: 20px;
+border-radius: 10px;
+}
+
+.confirmMessage-content {
+    background-color: #b8b8b8;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    animation: slideIn 0.3s ease;
+    color: black;
+
+  }
+  
+  .confirmMessage-btn {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .confirm-btn, .cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s   ;
+  }
+  
+  .confirm-btn {
+    background-color: #92343d;
+    color: white;
+  }
+
+  .confirm-btn:hover{
+    background-color: #ff0019;
+  }
+  
+  .cancel-btn {
+    background-color: #6c757d;
+    color: white;
+  }
+  .cancel-btn:hover{
+    background-color: greenyellow;
+    color: black;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(-20px); }
+    to { transform: translateY(0); }
+  }

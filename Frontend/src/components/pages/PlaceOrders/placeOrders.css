@@ -1,0 +1,109 @@
+.placeOrderAddressContainer{
+    margin: 10px 0;
+    padding: 20px 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px -9px rgba(0, 0, 0, 0.75);
+    width: 350px;
+}
+.paymentBtn{
+margin: 20px ;
+}
+.paymentBtn button{
+    font-size: 1.1rem;
+    padding: 15px;
+    width: 200px;
+    border-radius: 5px;
+    background-color: coral;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.paymentBtn button:hover{
+    background-color: chocolate;
+}
+
+.placeOrderAddress{
+    margin: 10px;
+}
+.placeOrderAddress .name{
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+.placeOrderAddress .addrs1 ,.contacts{
+    color: gray;
+}
+
+.placeOrderAddress .contacts span{
+    font-weight: 600;
+    color: rgb(48, 47, 47);
+}
+
+
+@media (max-width:1400px) {
+    .placeOrderAddressContainer{
+        margin: 0;
+        box-shadow: none;
+        border: 1px solid gray;
+        height: 260px;
+    }
+
+    .rightCart{
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+    }
+    .paymentBtn{
+        position: relative;
+        bottom: -227px;
+    }
+
+}
+
+@media (max-width:1150px) {
+    .paymentBtn{
+        position: static;
+    }
+    .cartRightContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
+
+@media (max-width:900px) {
+    .rightCart{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .cartRightContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .placeOrderAddressContainer {
+        height: auto;
+    }
+
+}
+
+@media (max-width: 650px) {
+    .placeOrderAddressContainer {
+        width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .placeOrderAddressContainer {
+        width: 270px;
+        height: auto;
+    }
+}

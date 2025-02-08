@@ -1,0 +1,69 @@
+.subscribeContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.subscribeContainer .subText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.subscribeContainer .subBtn input:first-child{
+    width: 400px;
+    height: 30px;
+    background-color: transparent;
+    color: black;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    border: 1px solid gray;
+    padding-left: 10px;
+}
+
+.subscribeContainer .subBtn input:last-child{
+    height: 31.6px;
+    padding: 5px;
+    background-color: greenyellow;
+    color: black;
+    border: 1px solid green;
+    outline: none;
+    width: 60px;
+    border-radius:  0 5px 5px 0px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in;
+}
+
+.subscribeContainer .subBtn input:last-child:hover{
+    background-color: green;
+}
+
+@media (max-width:550px) {
+    .subscribeContainer h2{
+        font-size: 20px;
+    }
+
+    .subscribeContainer p{
+        font-size: 12px;
+    }
+
+    .subscribeContainer .subBtn input:first-child{
+        width: 300px;
+    }
+
+
+}
+
+@media (max-width:480px) {
+    .subscribeContainer h2{
+        font-size: 18px;
+    }
+
+    .subscribeContainer .subBtn input:first-child{
+        width: 250px;
+    }
+}

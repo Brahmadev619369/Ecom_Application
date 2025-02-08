@@ -1,0 +1,135 @@
+.loginMainContainer{
+width: 100vw;
+display: flex;
+flex-direction: column;
+height: 90vh;
+align-items: center;
+padding: 50px 0;
+}
+
+.loginContainer{
+display: flex;
+width: 400px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+border: 1px solid gray;
+border-radius: 5px;
+gap: 10px;
+padding: 20px 0;
+}
+
+.loginContainer hr{
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+}
+
+.formContainer .formElement{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.formContainer .formElement input,textarea{
+    background-color: transparent;
+    outline: none;
+    border: 1px solid gainsboro;
+    color: black;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+    width: 300px;
+}
+
+.formContainer .formElement textarea{
+    padding-top:10px ;
+}
+
+.BtnText .submitBtn {
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    background-color:rgba(30, 220, 220, 0.449);
+    color: black;
+    border: none;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.BtnText .submitBtn:hover{
+    background-color:rgba(0, 255, 255, 0.986); 
+}
+
+.BtnText p{
+    font-size: small;
+}
+
+.BtnText p span{
+    color: rgb(225, 162, 35);
+    text-decoration: underline;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.BtnText p span:hover{
+    color:rgb(255, 170, 0);
+}
+
+.BtnText a{
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    font-size: small;
+    color: red;
+    transition: color 0.3s;
+}
+
+.BtnText a:hover{
+    color: maroon;
+}
+
+
+@media (max-width:450px) {
+    .loginContainer{
+        width: 350px;
+        gap:10px;
+        padding: 20px 0;
+        }
+        
+        .loginContainer hr{
+            width: 300px;
+            margin-bottom: 10px;
+        }
+}
+
+
+@media (max-width:400px) {
+    .loginContainer{
+        width: 300px;
+        gap:8px;
+        padding: 18px 0;
+        }
+        
+        .loginContainer hr{
+            width: 270px;
+            margin-bottom: 8px;
+        }
+
+        .formContainer .formElement input,textarea{
+            color: black;
+            height: 25px;
+            width: 250px;
+        }
+
+        .formContainer .formElement label{
+            font-size: small;
+        }
+}

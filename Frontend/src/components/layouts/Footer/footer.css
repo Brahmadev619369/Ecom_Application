@@ -1,0 +1,166 @@
+.footerContainer{
+width: 100%;
+background-color: rgb(243, 243, 243);
+padding: 20px;
+box-sizing: border-box;
+}
+
+.topFooter{
+    width: 80vw;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin: auto;
+    gap: 20px;
+}
+
+.firstSection ,.secondSection,.thirdSection{
+    margin-left: 30px;
+}
+.firstSection img{
+    height: 50px;
+}
+
+.firstSection p,.secondSection li a,.thirdSection p{
+    font-size: 15px;
+}
+.secondSection{
+    display: flex;
+    flex-direction: column;
+}
+
+.secondSection li{
+    list-style: none;
+    
+}
+
+.secondSection li a{
+    transition: color 0.3s ;
+}
+
+.secondSection li a:hover{
+    list-style: none;
+    color: rgb(110, 110, 110);
+}
+
+.bottomFooter{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 80vw;
+    margin: 20px auto;
+    align-items: center;
+}
+
+.bottomFooter p{
+    font-size: 15px;
+    color: rgb(103, 103, 103);
+}
+
+.socialLogo{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.socialLogo img{
+    height: 20px;
+    width: 20px;
+}
+
+.socialIcon{
+    height: 20px;
+}
+
+.pageUp{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    user-select: none;
+    cursor: pointer;
+}
+.socialLogoPageUp{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    
+}
+@media (max-width:900px) {
+    .topFooter{
+        width: 90vw;
+    }
+}
+
+@media (max-width:700px) {
+    .firstSection img{
+        height: 30px;
+        margin-bottom: 5px;
+    }
+
+    .secondSection h2{
+        font-size:18px ;
+        margin-bottom: 5px;
+    }
+
+    .thirdSection h2{
+        font-size:18px ;
+        margin-bottom: 5px;
+    }
+
+    .firstSection p,.secondSection li a,.thirdSection p{
+        font-size: 14px;
+    }
+
+
+}
+
+@media (max-width:570px) {
+    .firstSection img{
+        height: 30px;
+        margin-bottom: 5px;
+    }
+
+    .firstSection p,.secondSection li a,.thirdSection p{
+        font-size: 12px;
+    }
+
+    .secondSection h2{
+        font-size:17px ;
+        margin-bottom: 5px;
+        
+    }
+
+    .thirdSection h2{
+        font-size:17px ;
+        margin-bottom: 5px;
+    }
+
+
+    .topFooter{
+        width: 90vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .secondSection ul {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .bottomFooter{
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .socialLogoPageUp{
+        width: 70vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

@@ -1,0 +1,195 @@
+.collectionContainer {
+  display: flex;
+  flex-direction: row;
+  margin: 70px 20px;
+  gap: 20px;
+
+}
+
+
+/* Filter toggle button for small screens */
+.filterToggle {
+  display: none;
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 60px;
+}
+
+/* Filters container */
+.collectionFilter {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.3s ease;
+}
+
+/* Category styling */
+.category {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+}
+
+.category label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  gap: 5px;
+}
+
+/* Checkbox styling */
+.category input[type="checkbox"] {
+  appearance: none; /* Removes default browser styling */
+  width: 18px;
+  height: 18px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.category input[type="checkbox"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 6px;
+  height: 10px;
+  border: solid #007bff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.category input[type="checkbox"]:hover {
+  border-color: #007bff;
+}
+
+.category input[type="checkbox"]:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+
+
+/* Show and hide filters for small screens
+.showFilters {
+  display: flex;
+  flex-direction: column;
+} */
+
+.titleFilter{
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  position: relative;
+}
+
+.crossFilter{
+  display: none;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .collectionFilter{
+    display: none;
+    position: absolute;
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 10px;
+    width: 85vw;
+    top: -5px;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    visibility:hidden;
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.3s ease-in-out;
+
+  }
+  .filterSection{
+    position: absolute;
+    margin-top: 10px;
+    
+  }
+  /* Show the filter toggle button */
+  .filterToggle {
+    display: block;
+    height: 22.5;
+    
+  }
+
+
+  .collectionFilter.showFilters {
+    display: flex;
+    visibility:visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+
+  .crossFilter{
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    transition: transform 0.3s ease;
+  }
+
+  .crossFilter.rotate {
+    transform: rotate(180deg); /* Rotate 180 degrees */
+  }
+
+}
+
+
+/* collection section */
+.collectionSection{
+  width: 100%;
+}
+
+.collectionHead{
+ margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 31px;
+}
+
+
+
+@media (max-width:450px) {
+  .heading .line1{
+    width: 40px;
+  }
+}
+
+@media (max-width:360px) {
+  .heading h2 {
+    font-size: 13px  ;
+  }
+  .heading .line1{
+    width: 35px;
+  }
+}

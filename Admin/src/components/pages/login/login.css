@@ -1,0 +1,93 @@
+.adminLoginPanel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #7d9cd5, #9ea050);
+}
+
+.adminLogin {
+    background: #ffffff;
+    padding: 40px;
+    width: 380px;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.adminLogin h1 {
+    color: #1e3c72;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.adminLogin h2 {
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.loginForm h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.loginForm hr {
+    border: 0;
+    height: 2px;
+    background: linear-gradient(to right, #1e3c72, #71a1f4);
+    margin-bottom: 20px;
+}
+
+.email, .password {
+    margin-bottom: 15px;
+}
+
+.email input,
+.password input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.email input:focus,
+.password input:focus {
+    border-color: #1e3c72;
+    box-shadow: 0 0 5px rgba(30, 60, 114, 0.5);
+}
+
+.btn button {
+    width: 100%;
+    padding: 12px;
+    background: #1e3c72;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn button:hover {
+    background: #2a5298;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

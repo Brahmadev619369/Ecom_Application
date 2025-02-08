@@ -1,0 +1,25 @@
+.errorContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    margin: 50px;
+}
+
+.errorContainer h2{
+    color: brown;
+}
+
+.errorContainer button{
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    background-color: coral;
+    transition: box-shadow 0.3s ease,transform 0.3s ease-in;
+}
+
+.errorContainer button:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transform: translateY(-5px);
+}

@@ -1,0 +1,156 @@
+.profileContainer{
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    margin: 20px auto;
+    align-items: center;
+}
+
+.profileDetails{
+    height: 250px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.profileDetails .profileAvatar img{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 10px solid rgb(226, 238, 238);
+    object-fit:cover;
+    
+}
+
+.edit-btn-ckeck, .editBtn{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    position: absolute;
+    bottom: 30px;
+    background-color: rgb(217, 192, 192);
+    padding: 8px;
+    border-radius: 15px;
+    right: 40px;
+    cursor: pointer;
+}
+
+.userDetailsContainer{
+    padding: 20px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+.userDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;;
+}
+
+.userDetails input{
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    padding: 0px 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    height: 30px;
+    width: 350px;
+}
+
+.userDetails .btn{
+    width: 100px;
+    background-color: coral;
+    transition: background-color 0.3s;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.userDetails .btn:hover{
+    background-color: tomato;
+}
+
+
+
+@media (max-width:480px) {
+    .profileContainer{
+        margin-top: 70px;
+    }
+    .userDetails input {
+        height: 30px;
+        width: 300px;
+    }
+
+    .profileDetails{
+        height: 230px;
+        width: 230px;
+
+    }
+
+   .edit-btn-ckeck, .editBtn{
+        bottom: 17px;
+        right: 40px;
+    }
+
+    
+    .profileDetails .profileAvatar img{
+        min-height: 170px;
+        min-width: 170px;
+        
+    }
+}
+
+
+@media (max-width:450px) {
+    .userDetails input {
+        height: 30px;
+        width: 260px;
+    }
+
+    .profileDetails{
+        height: 200px;
+        width: 200px;
+
+    }
+    
+    .profileDetails .profileAvatar img{
+        height: 170px;
+        width: 170px;
+        
+    }
+
+    .edit-btn-ckeck, .editBtn{
+        bottom: 17px;
+        right: 25px;
+    }
+
+    .profileContainer .userName h2{
+        margin: 10px 0;
+    }
+}
+
+@media (max-width:340px) {
+    .userDetails input {
+        height: 25px;
+        width: 230px;
+    }
+
+    .profileDetails{
+        height: 170px;
+        width: 170px;
+
+    }
+    
+    .profileDetails .profileAvatar img{
+        height: 150px;
+        width: 150px;
+        
+    }
+
+    .edit-btn-ckeck, .editBtn{
+        bottom: 5px;
+        right: 5px;
+    }
+}

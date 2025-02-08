@@ -1,0 +1,247 @@
+.addressMainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.addressMainContainer h2 {
+    text-align: center;
+    margin: 10px;
+
+}
+.addressMainContainer hr{
+    width: 90vw;
+    height: 5px;
+    background-color: coral;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
+}
+.addressContainer .noSavedAddress{
+  display: none;
+}
+
+.addressContainer {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    width: 95vw;
+}
+
+
+.leftContainer {
+    padding: 30px;
+    border: 1px solid rgb(214, 214, 214);
+    border-radius: 10px;
+
+}
+
+.leftContainer input{
+    background-color: transparent;
+    color: black    ;
+}
+.leftContainer h3,
+.rightContainer h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.addressContainer .leftContainer input {
+    margin: 10px;
+    width: 250px;
+    height: 30px;
+    border-radius: 7px;
+    padding-left: 10px;
+    outline: none;
+    border: 1px solid saddlebrown;
+}
+
+.addressContainer .leftContainer input::placeholder {
+    padding-left: 10px;
+}
+
+.addressContainer .singleInput input {
+    width: 520px;
+}
+
+.addressContainer .rightContainer .CartTotalContainer {
+    width: 500px;
+}
+
+.addressContainer .rightContainer .CartTotalContainer .cartTotal {
+    width: 500px;
+    border: none;
+}
+
+
+
+.addressContainer .rightContainer {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    height: auto;
+    max-height: 70vh;
+    padding: 20px;
+    overflow: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin; 
+    scrollbar-color: #888 transparent; 
+}
+
+.addressContainer .rightContainer::-webkit-scrollbar {
+    height: 6px; 
+  }
+  
+  .addressContainer .rightContainer::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px; 
+  }
+  
+  .addressContainer .rightContainer::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+  .addressContainer .rightContainer::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+.addressContainer .addressCard {
+    /* display: flex; */
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+    
+  }
+  
+  .addressContainer .addressCard:hover {
+    border-color: #007bff;
+  }
+  
+  .addressContainer .addresscard input[type="radio"] {
+    margin-right: 15px;
+    accent-color: #007bff;
+    cursor: pointer;
+  }
+  
+  .addressContainer .address {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+    cursor: pointer;
+
+  }
+  
+  .addressContainer .addressCard .address {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .addressContainer .addressCard .address br {
+    margin: 5px 0;
+  }
+  
+  .addressContainer .addressCard .address span {
+    font-weight: bold;
+  }
+
+  .PhoneInput{
+    margin-left:10px
+  }
+
+  .checkOut button{
+    padding: 10px;
+    background-color: coral;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .checkOut button:hover{
+    background-color: chocolate;
+  }
+
+  .addressDel{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+
+  .del-btn{
+    color: red;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .del-btn:hover{
+    color: brown;
+  }
+  @media (max-width:1200px) {
+    .addressContainer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.addressContainer .checkOut{
+    margin: 10px 12px;
+}
+
+
+
+@media (max-width:600px) {
+  .leftContainer {
+    padding: 10px;
+    /* border: 1px solid greenyellow; */
+
+}
+
+.leftContainer h3,
+.rightContainer h3 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.formContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formContainer .multiInput{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.addressContainer .leftContainer input::placeholder {
+    padding-left: 10px;
+}
+.addressContainer .multiInput input {
+  width: 80vw;
+}
+.addressContainer .singleInput input {
+    width: 80vw;
+}
+
+.addressContainer .input input{
+  width: 80vw;
+}
+
+}
+
+@media (max-width:385px){
+  .PhoneInput{
+    width: 82vw;
+  }
+}

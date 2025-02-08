@@ -1,0 +1,111 @@
+.contactSupportContainer{
+    width: 70vw;
+    display: grid;
+    margin: 50px auto;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    align-content: center;
+    gap: 5px;
+}
+
+.bestQlty,.exchange,.support{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactSupportContainer img{
+    height: 65px;
+    width: 65px;
+    margin: 5px
+}
+
+
+.supportText{
+    color: gray;
+    font-size: 10px;
+    margin: 3px 0;
+}
+@media (max-width:1000px) {
+
+    .contactSupportContainer{
+        width: 80vw;
+    }
+
+    .contactSupportContainer img{
+        height: 50px;
+        width: 50px;
+        margin: 5px
+    }
+
+    .contactSupportContainer p{
+        font-size: 15px;
+    }
+}
+
+@media (max-width:750px) {
+
+    .contactSupportContainer{
+        width: 90vw;
+    }
+}
+
+@media (max-width:650px) {
+
+    .contactSupportContainer{
+        width: 95vw;
+    }
+
+    .contactSupportContainer img{
+        height: 40px;
+        width: 40px;
+        margin: 5px
+    }
+
+    .contactSupportContainer p{
+        font-size: 13px;
+    }
+}
+
+@media (max-width:550px) {
+
+    .contactSupportContainer{
+        width: 100vw;
+    }
+
+    .contactSupportContainer img{
+        height: 35px;
+        width: 35px;
+        margin: 5px
+    }
+
+    .contactSupportContainer p{
+        font-size: 12px;
+    }
+}
+
+@media (max-width:480px) {
+
+    .contactSupportContainer{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        width: 80vw;
+        gap: 20px;
+    }
+
+    .contactSupportContainer img{
+        height: 35px;
+        width: 35px;
+        margin: 5px
+    }
+
+    .contactSupportContainer p{
+        grid-template-columns: 1fr;
+        font-size: 13px;
+    }
+
+    .supportText{
+        font-size: 9px;
+    }
+}

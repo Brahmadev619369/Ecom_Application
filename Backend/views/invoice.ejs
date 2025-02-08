@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .invoice-container { max-width: 700px; margin: auto; padding: 20px; border: 1px solid #ddd; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 20px; }
+        .table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .table th, .table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .table th { background: #f4f4f4; }
+        .total { text-align: right; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <h1>QuickBite Invoice</h1>
+        <div class="header">
+            <div>
+                <p><strong>Sold By:</strong> QuickBite Limited</p>
+                <p>Bill-from Address: Demo Address</p>
+            </div>
+            <div>
+                <p><strong>Order ID:</strong> <%= order.orderId %></p>
+                <p><strong>Order Date:</strong>25jun</p>
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="total">Grand Total</td>
+                <td>₹ <%= order.totalAmount %></td>
+            </tr>
+        </table>
+        <p style="text-align: center; margin-top: 20px;">Thank you for shopping with QuickBite!</p>
+    </div>
+</body>
+</html>

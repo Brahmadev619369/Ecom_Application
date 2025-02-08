@@ -1,0 +1,19 @@
+.loaderContainer{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 111;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+}
+
+.loaderContainer img {
+    width: 300px;
+    height: auto;
+}
+
+
+

@@ -1,0 +1,67 @@
+.invoice-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    font-family: sans-serif;
+    width: 80%; 
+    margin: 20px auto;
+  }
+  
+  .invoice-header {
+      text-align: center;
+      margin-bottom: 20px;
+  }
+  
+  .invoice-header img{
+    height: 50px;
+ }
+  .invoice-details{
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .invoice-table {
+    margin: 20px 0;
+    width: 100%;
+    border-collapse: collapse;
+
+  }
+
+  
+  .invoice-table th, .invoice-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .invoice-total {
+    text-align: right;
+    font-weight: bold;
+    margin-bottom: 50px;
+  }
+  
+ .disclaimer p{
+    text-align: center;
+    margin: 10px;
+ }
+ .thanxLogo{
+    margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+ }
+ .thanxLogo img{
+    height: 40px;
+ }
+ .thanxLogo p{
+    margin: 0;
+ }
+
+ .invoiceFooter{
+    margin-top: 30px;
+ }
+
+ .invoiceFooter .contactYourcart{
+    margin: 10px 0;
+ }

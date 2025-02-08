@@ -1,0 +1,41 @@
+.terms-container {
+    color: gray;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    width: 80%;
+    margin: 20px auto ;
+}
+.terms-container p{
+    font-size: 13px;
+
+}
+.underline{
+    text-decoration: underline;
+}
+.terms-container strong{
+    font-size: 14px;
+}
+.margin{
+    margin: 10px 0;
+}
+
+.terms-content{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.footer-terms{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.footer-terms ul{
+    margin: 10px 30px;
+}
+.footer-terms li{
+    font-size: 13px;
+}

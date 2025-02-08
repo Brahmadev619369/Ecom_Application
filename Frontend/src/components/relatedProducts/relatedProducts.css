@@ -1,0 +1,37 @@
+.collectionDisplay1 {
+    overflow-x: auto; /* Enable horizontal scrolling only if needed */
+    scrollbar-width: thin; /* For Firefox: Makes the scrollbar thin */
+    scrollbar-color: #888 transparent; /* Color customization for Firefox */
+  }
+  
+  .collectionDisplay1::-webkit-scrollbar {
+    height: 6px; /* Reduce the scrollbar height */
+  }
+  
+  .collectionDisplay1::-webkit-scrollbar-thumb {
+    background: #888; /* Thumb color */
+    border-radius: 10px; /* Rounded edges for the scrollbar thumb */
+  }
+  
+  .collectionDisplay1::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Darker shade on hover */
+  }
+  
+  .collectionDisplay1::-webkit-scrollbar-track {
+    background: transparent; /* Transparent track for the scrollbar */
+  }
+  
+  .collectionContainer1 {
+    display: flex;
+    gap: 12px; 
+    padding: 10px; 
+  }
+  
+  
+  .latestCollectionMainContainer1 h2 {
+    font-size: 1.5rem; 
+    margin-bottom: 10px;
+    text-align: center; 
+    color: #333; 
+  }
+  

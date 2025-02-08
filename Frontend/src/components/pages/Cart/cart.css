@@ -1,0 +1,684 @@
+.cartMainContainer {
+    /* width: 80vw; */
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(247, 247, 247);
+    padding: 50PX;
+    justify-content: space-evenly
+}
+
+.cartContainer {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px -9px rgba(0, 0, 0, 0.75);
+}
+
+.cartMainContainer h2 {
+    margin-bottom: 30PX;
+    text-align: center;
+}
+
+.cartCards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 50px;
+    padding: 0 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 500px;
+    margin-bottom: 20px;
+}
+
+
+.cartCards {
+    scrollbar-width: thin;
+    /* For Firefox: Makes the scrollbar thin */
+    scrollbar-color: #888 transparent;
+    /* Color customization for Firefox */
+}
+
+.cartCards::-webkit-scrollbar {
+    height: 6px;
+    /* Reduce the scrollbar height */
+}
+
+.cartCards::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Thumb color */
+    border-radius: 10px;
+    /* Rounded edges for the scrollbar thumb */
+}
+
+.cartCards::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Darker shade on hover */
+}
+
+.cartCards::-webkit-scrollbar-track {
+    background: transparent;
+    /* Transparent track for the scrollbar */
+}
+
+.cartCards hr {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.cartCard {
+    width: 500px;
+    background-color: rgb(251, 251, 251);
+    padding: 20px;
+}
+
+.imgName {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.imgName .img img {
+    height: 80px;
+    border-radius: 5px;
+}
+
+.nameAndPrice .size {
+    font-size: small;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.nameAndPrice .price {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 200px;
+    align-items: baseline;
+}
+
+.nameAndPrice .price p:first-child {
+    font-size: 15px;
+    text-decoration: line-through;
+}
+
+.nameAndPrice .price p:nth-child(2) {
+    font-weight: 600;
+}
+
+.nameAndPrice .price p:nth-child(3) {
+    color: green;
+    font-size: 15px;
+    font-weight: 600;
+
+}
+
+.updateAndDelete {
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 100px;
+}
+
+.updateAndDelete .updateCart {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.updateAndDelete .updateCart button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
+    border: 1px solid rgb(169, 167, 167);
+    outline: none;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.updateAndDelete .updateCart button:hover {
+    background-color: #c4c4c4;
+}
+
+.updateAndDelete .updateCart div {
+    border: 1px solid rgb(169, 167, 167);
+    width: 30px;
+    text-align: center;
+}
+
+.deleteCart {
+    cursor: pointer;
+    color: rgb(255, 98, 0);
+    transition: color 0.3s;
+}
+
+.deleteCart:hover {
+    color: rgb(255, 0, 0);
+}
+
+.cartRightContainer p {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.cartRightContainer .icon {
+    font-size: 25px;
+    padding: 0;
+    align-self: center;
+}
+
+.cartAmountContainer {
+    padding: 20px 10px;
+    background-color: #fff;
+    height: 260px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px -9px rgba(0, 0, 0, 0.75);
+    width: 350px;
+}
+
+.cartAmount {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cartAmountContainer hr {
+    width: 100%;
+}
+
+.Amt,
+.discount,
+.delivery,
+.total-amt {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartAmount hr {
+    border: 2px dotted rgb(203, 67, 67);
+    border-style: none none dotted;
+    color: #fff;
+    background-color: #fff;
+}
+
+.total-amt {
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+.cartAmount{
+    padding-bottom: 0;
+}
+
+.total-amt .total {
+    font-weight: 700;
+}
+
+.discount .dis2 {
+    color: green;
+}
+
+.delivery .free {
+    color: green
+}
+
+.nameAndPrice .name {
+    transition: color 0.3s;
+}
+
+.nameAndPrice .name:hover {
+    color: rgb(24, 46, 210);
+    cursor: pointer;
+}
+
+.cartCard .img {
+    cursor: pointer;
+}
+
+.placeOrderBtn {
+    margin-left: 50px;
+}
+
+.placeOrderBtn button {
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    background-color: coral;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.placeOrderBtn button:hover {
+    background-color: chocolate;
+}
+
+
+
+/* @media (max-width:1900px) {
+    .cartMainContainer {
+        width: 80vw;
+        margin: auto ;
+        padding: 30px;
+        gap: 20px;
+    
+    }
+} */
+
+@media (max-width:1400px) {
+    .cartMainContainer {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(247, 247, 247);
+        padding: 50PX;
+        gap: 20px;
+        /* justify-content: space-between; */
+    }
+
+    .cartCards {
+        align-items: center;
+    }
+
+    .cartRightContainer {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 10px 10px 5px -9px rgba(0, 0, 0, 0.75);
+        display: flex;
+        flex-direction: row;
+        border-radius: 10px;
+    }
+
+    .cartAmountContainer {
+        width: 350px;
+        border: 1px solid gray;
+        box-shadow: none;
+    }
+
+    .placeOrderBtn {
+        position: relative;
+    }
+
+    .placeOrderBtn button {
+        position: absolute;
+        bottom: 65px;
+        width: 140px;
+    }
+}
+
+@media (max-width:860px) {
+    .cartRightContainer {
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cartRightContainer .rightCart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .placeOrderBtn {
+        position: relative;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .placeOrderBtn button {
+        position: relative;
+        bottom: 10px;
+        width: 140px;
+
+    }
+
+    .cartMainContainer {
+        padding: 30px;
+    }
+
+    .cartCards {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 0 30px;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width:750px) {
+    .cartCard {
+        width: 400px;
+    }
+
+    .imgName {
+        display: flex;
+        gap: 30px;
+    }
+
+    .updateAndDelete {
+        width: 250px;
+    }
+}
+
+@media (max-width:650px) {
+    .cartCard {
+        width: 350px;
+    }
+
+    .imgName .img img {
+        height: 70px;
+        border-radius: 5px;
+    }
+
+    .nameAndPrice .name {
+        font-size: 15px;
+    }
+
+    .updateAndDelete {
+        margin-top: 10px;
+        width: 230px;
+    }
+
+    .updateAndDelete .updateCart {
+        align-items: center;
+
+    }
+
+    .updateAndDelete .updateCart button {
+        height: 20px;
+        width: 20px;
+
+    }
+
+    .updateAndDelete .updateCart div {
+        font-size: 10px;
+        height: 15px;
+        width: 20px;
+    }
+}
+
+@media (max-width:650px) {
+    .cartMainContainer h2 {
+        font-size: 20px;
+    }
+
+    .cartCard {
+        width: 300px;
+        padding: 10px;
+    }
+
+    .imgName .img img {
+        height: 58px;
+        border-radius: 5px;
+    }
+
+    .nameAndPrice .name {
+        font-size: 13px;
+    }
+
+    .nameAndPrice .size {
+        font-size: 11px;
+    }
+
+    .nameAndPrice .price p:first-child {
+        font-size: 12px;
+    }
+
+    .nameAndPrice .price p:nth-child(2) {
+        font-size: 13px;
+    }
+
+    .nameAndPrice .price p:nth-child(3) {
+        font-size: 12px;
+    }
+
+    .updateAndDelete {
+        margin-left: 70px;
+        margin-top: 10px;
+        width: 200px;
+    }
+
+    .updateAndDelete .updateCart {
+        align-items: center;
+
+    }
+
+    .updateAndDelete .updateCart button {
+        height: 20px;
+        width: 20px;
+    }
+
+    .updateAndDelete .updateCart div {
+        font-size: 10px;
+        height: 15px;
+        width: 20px;
+    }
+
+    .cartCards {
+        margin: 0 25px;
+        padding: 0 10px;
+    }
+
+    .cartAmountContainer {
+        width: 300px;
+
+    }
+
+}
+
+@media (max-width:480px) {
+    .cartMainContainer {
+        padding: 10px;
+    }
+
+    .cartContainer {
+        background-color: #fff;
+        padding: 10px 20px;
+    }
+
+    .cartMainContainer h2 {
+        font-size: 17px;
+    }
+
+    .cartCard {
+        width: 270px;
+        padding: 10px;
+    }
+
+    .imgName .img img {
+        height: 53px;
+        border-radius: 5px;
+    }
+
+    .nameAndPrice .name {
+        font-size: 11px;
+    }
+
+    .nameAndPrice .size {
+        font-size: 9px;
+    }
+
+    .nameAndPrice .price p:first-child {
+        font-size: 9px;
+    }
+
+    .nameAndPrice .price p:nth-child(2) {
+        font-size: 10px;
+    }
+
+    .nameAndPrice .price p:nth-child(3) {
+        font-size: 9px;
+    }
+
+    .updateAndDelete {
+        margin-left: 50px;
+        margin-top: 10px;
+        width: 170px;
+    }
+
+    .updateAndDelete .updateCart {
+        align-items: center;
+
+    }
+
+    .updateAndDelete .updateCart button {
+        height: 17px;
+        width: 17px;
+    }
+
+    .updateAndDelete .updateCart div {
+        font-size: 8px;
+        height: 12px;
+        width: 17px;
+    }
+
+    .nameAndPrice .price {
+        width: 150px;
+    }
+
+    .deleteCart {
+        font-size: 15px;
+    }
+
+    .cartCards {
+        margin: 0 20px;
+        padding: 0 10px;
+    }
+
+
+    .cartAmountContainer {
+        width: 270px;
+        height: 260px;
+    }
+
+    .Amt,
+    .discount,
+    .delivery,
+    .total-amt {
+        font-size: 15px;
+    }
+
+    .cartRightContainer p {
+        font-size: 12px;
+    }
+
+}
+
+
+@media (max-width:480px) {
+    .cartMainContainer {
+        padding: 8px;
+    }
+
+    .cartContainer {
+        background-color: #fff;
+        padding: 20px 17px;
+    }
+
+    .cartMainContainer h2 {
+        font-size: 15px;
+    }
+
+    .cartCard {
+        width: 260px;
+        padding: 8px;
+    }
+
+    .imgName .img img {
+        height: 50px;
+        border-radius: 5px;
+        margin-left: 5px;
+    }
+
+    .nameAndPrice .name {
+        font-size: 10px;
+    }
+
+    .nameAndPrice .size {
+        font-size: 8px;
+    }
+
+    .nameAndPrice .price p:first-child {
+        font-size: 8px;
+    }
+
+    .nameAndPrice .price p:nth-child(2) {
+        font-size: 9px;
+    }
+
+    .nameAndPrice .price p:nth-child(3) {
+        font-size: 8px;
+    }
+
+    .updateAndDelete {
+        margin-left: 30px;
+        margin-top: 10px;
+        width: 150px;
+    }
+
+    .updateAndDelete .updateCart {
+        align-items: center;
+
+    }
+
+    .updateAndDelete .updateCart button {
+        height: 15px;
+        width: 15px;
+    }
+
+    .updateAndDelete .updateCart div {
+        font-size: 7px;
+        height: 10px;
+        width: 15px;
+    }
+
+    .nameAndPrice .price {
+        width: 130px;
+    }
+
+    .deleteCart {
+        font-size: 13px;
+    }
+
+    .cartCards {
+        margin: 0 15px;
+        padding: 0 8px;
+    }
+
+
+    .cartAmountContainer {
+        width: 270px;
+        height: 260px;
+    }
+
+    .Amt,
+    .discount,
+    .delivery,
+    .total-amt {
+        font-size: 13px;
+    }
+
+    .cartRightContainer p {
+        font-size: 10px;
+    }
+
+}
+
+
+

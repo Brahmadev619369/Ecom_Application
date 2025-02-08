@@ -1,0 +1,348 @@
+.order-Details-MainContainer{
+    
+   margin: auto;
+    width: 90vw;
+    padding: 20px;
+}
+
+.left-right-container{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin:auto;
+    padding: 20px;
+    justify-content: center;
+}
+
+.ordersDetails{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgb(250, 250, 250);
+    padding: 20px;
+    width: 50vw;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.ordersDetails .itemCard{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background-color: aliceblue;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.ordersDetails .itemCard .img{
+    height: 150px;
+}
+
+.ordersDetails .itemCard .img img{
+    height: 150px;
+}
+
+.itemCard .nameAndOthers .name{
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.itemCard .nameAndOthers .gray-color{
+    color: gray;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.itemCard .nameAndOthers .price{
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.left-Container .otherDetails{
+    background-color: rgb(250, 250, 250);
+    padding: 10px 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+.left-Container .otherDetails .deliveryStatus {
+    font-weight: 600;
+    font-size: large;
+}
+
+.left-Container .otherDetails .Green {
+    font-weight: 600;
+color: green;
+}
+
+.left-Container .otherDetails .statusDate span{
+    font-size: 14px;
+}
+.right-Container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 300px;
+}
+.addAndPriceContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.invoiceContainer .invoiceBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(250, 250, 250);
+    cursor: pointer;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.invoiceContainer .invoiceBtn:hover{
+    background-color: rgb(245, 245, 245);
+}
+.invoiceContainer .invoiceBtn .invoce{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.invcIcon{
+    color: rgb(105, 0, 233);
+}
+
+.shippingAddContainer{
+    background-color: rgb(250, 250, 250);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.adressContainer p{
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.adressContainer .shippingAddress{
+    padding: 10px 20px;
+}
+
+.adressContainer .shippingAddress .name{
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.adressContainer .shippingAddress{
+font-size: 14px;
+}
+.adressContainer .shippingAddress .email{
+    margin-top: 5px;    
+}
+
+.shippingAddress span{
+    font-weight: 600;
+}
+
+.OrderPriceDetailsContainer{
+    background-color: rgb(250, 250, 250);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.OrderPriceDetailsContainer h6{
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.priceDetails{
+    padding: 10px 20px;
+}
+
+.listPrice,.selling,.dis ,.deliveryFee ,.totalAmount{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.priceDetails p {
+    font-size: 14px;
+}
+
+.priceDetails .totalAmount{
+    margin-top: 5px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.priceDetails .green p:last-child{
+    font-weight: 600;
+    color: green;
+}
+
+
+
+@media (max-width:1000px) {
+    .ordersDetails .itemCard .img{
+        height: 130px;
+    }
+    
+    .ordersDetails .itemCard .img img{
+        height: 130px;
+    }
+    
+    .itemCard .nameAndOthers .name{
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 15px;
+    }
+
+    .left-right-container{
+        gap: 30px;
+    }
+}
+
+@media (max-width:800px) {
+    .ordersDetails{
+        width: 70vw;
+    }
+
+    .ordersDetails .itemCard .img{
+        height: 130px;
+    }
+    
+    .ordersDetails .itemCard .img img{
+        height: 130px;
+    }
+    
+    .itemCard .nameAndOthers .name p{
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 15px;
+    }
+
+    .left-right-container{
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+    .right-Container{
+        flex-direction: column-reverse;
+    }
+}
+
+
+@media (max-width:560px) {
+    .ordersDetails{
+        width: 70vw;
+    }
+
+    .ordersDetails .itemCard .img{
+        height: 110px;
+    }
+    
+    .ordersDetails .itemCard .img img{
+        height: 110px;
+    }
+    
+    .itemCard .nameAndOthers .name p{
+        font-weight: 600;
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+
+    .itemCard .nameAndOthers .gray-color p{
+        font-size: 11px;
+    }
+
+    .itemCard .nameAndOthers .price p{
+        font-size: 14px;
+    }
+
+    .left-right-container{
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+    .right-Container{
+        flex-direction: column-reverse;
+    }
+}
+
+
+@media (max-width:520px) {
+    .ordersDetails{
+        width: 80vw;
+    }
+
+    .ordersDetails .itemCard .img{
+        height: 100px;
+    }
+    
+    .ordersDetails .itemCard .img img{
+        height: 100px;
+    }
+    
+    .itemCard .nameAndOthers .name p{
+        font-weight: 600;
+        margin-bottom: 15px;
+        font-size: 12px;
+    }
+
+    .itemCard .nameAndOthers .gray-color p{
+        font-size: 10px;
+    }
+
+    .itemCard .nameAndOthers .price p{
+        font-size: 12px;
+    }
+
+    .left-right-container{
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+    .right-Container{
+        flex-direction: column-reverse;
+    }
+}
+
+
+@media (max-width:400px) {
+    .ordersDetails{
+        width: 80vw;
+    }
+
+    .ordersDetails .itemCard .img{
+        height: 80px;
+    }
+    
+    .ordersDetails .itemCard .img img{
+        height: 80px;
+    }
+    
+    .itemCard .nameAndOthers .name p{
+        font-weight: 600;
+        margin-bottom: 12px;
+        font-size: 10px;
+    }
+
+    .itemCard .nameAndOthers .gray-color p{
+        font-size: 9px;
+    }
+
+    .itemCard .nameAndOthers .price p{
+        font-size: 10px;
+    }
+
+    .left-right-container{
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+    .right-Container{
+        flex-direction: column-reverse;
+    }
+}
+

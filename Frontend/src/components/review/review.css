@@ -1,0 +1,270 @@
+.reviewForm .reviewInput{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 20px;
+}
+
+.reviewForm .reviewInput textarea{
+    padding: 5px;
+    width: 300px;
+}
+ 
+.reviewForm button{
+    background-color: chocolate;
+    padding: 5px;
+    outline: none;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+   transition: background-color 0.3s; 
+}
+
+.reviewForm button:hover{
+    background-color: coral;
+}
+
+.displayReviews{
+    margin: 20px auto;
+}
+
+.reviewContainer .main{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.reviewScroll{
+    padding-right: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin; 
+    scrollbar-color: #888 transparent; 
+}
+
+  .reviewScroll::-webkit-scrollbar {
+    height: 6px; 
+  }
+  
+  .reviewScroll::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px; 
+  }
+  
+  .reviewScroll::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+  .reviewScroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+.displayReviews .displayReview .rateAndReview {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.displayReviews .displayReview .rateAndReview .rating{
+    background-color: green;
+    width: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 2px 5px;
+}   
+
+.displayReviews .displayReview .rateAndReview .red{
+    background-color: brown;
+}
+
+.displayReviews .displayReview .rateAndReview .rating p{
+    font-size: 10px;
+    align-items: center;
+    justify-self: center;
+    display: flex;
+    color: white;
+    text-align: center;
+    margin: 0 2px;
+    
+}   
+
+.displayReviews .displayReview .rateAndReview .rating .rate{
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.displayReviews .displayReview .rateAndReview .review::first-letter{
+    text-transform: uppercase;
+}
+
+.displayReviews .displayReview .img{
+    margin: 5px 0;
+}
+.displayReviews .displayReview .img img{
+    height: 50px;
+    border-radius: 5px;
+}
+.displayReviews .displayReview .noImg{
+    display: none;
+}
+
+.displayReviews .displayReview .nameAndDate{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    color: gray;
+}
+
+.displayReviews .displayReview .nameAndDate p{
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.displayReviews .displayReview .nameAndDate{
+    margin-bottom: 5px;
+}
+.displayReviews .displayReview .nameAndDate p:last-child{
+    font-size: 10px;
+}
+
+
+
+/* // pop up  */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    box-sizing: border-box;
+  }
+  
+  .modalContent {
+    position: relative;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+  }
+  
+  .modalImage {
+
+    max-width: 500px;
+    max-height: 500px;
+    object-fit: contain;
+  }
+  
+  .closeModal {
+    position: absolute;
+    top: -5px;
+    right: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+.reviewFooter{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+  .displayReview .Btn,.nameAndDate{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .displayReview .Btn{
+    margin-right: 20px;
+  }
+
+  .displayReview .Btn .edit-Btn{
+    cursor: pointer;
+    color: green;
+    font-size: 18px;
+    transition: color 0.3s;
+  }
+
+  .displayReview .Btn .edit-Btn:hover{
+    color: rgb(92, 147, 10);
+  }
+
+  .displayReview .Btn .delete-Btn{
+    cursor: pointer;
+    color: rgb(255, 30, 0);
+    font-size: 18px;
+    transition: color 0.3s;
+  }
+  .displayReview .Btn .delete-Btn:hover{
+    color: rgb(112, 23, 9);
+  }
+
+  
+@media (max-width:1100px) {
+ .reviewForm .reviewInput{
+    flex-direction: column;
+ }
+
+}
+
+@media (max-width: 560px) {
+    .textContainer h2, p {
+        font-size: 1rem;
+    }
+
+    .reviewForm .reviewInput textarea{
+        width: 250px;
+        height: 50px;
+    }
+}
+
+@media (max-width:900px) {
+    .reviewContainer .main {
+        font-size: 15px;
+    }
+}
+
+@media (max-width:700px) {
+      .modalImage {
+    
+        max-width: 300px;
+        max-height: 300px;
+        object-fit: contain;
+      }
+}
+
+@media (max-width:700px) {
+      
+    .modalContent {
+      position: relative;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+    }
+    
+    .modalImage {
+  
+      max-width: 250px;
+      max-height: 250px;
+      object-fit: contain;
+    }
+    
+    .closeModal {
+      position: absolute;
+      top: -5px;
+      right: 8px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+}
