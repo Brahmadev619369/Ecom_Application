@@ -55,6 +55,9 @@ app.use("/api",invoiceRoute)
 app.use("/api",subscribeRoute)
 app.use("/api/wishlist",wishlistRoute)
 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 // Handle client connections with Socket.io
 io.on("connection",(socket)=>{
   console.log("User Connected.")
