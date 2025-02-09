@@ -54,7 +54,7 @@ const fetchProducts = async(req,res) =>{
     
     
     try {
-        const response = await Products.find()
+        const response = await Products.find().sort({"createdAt":-1})
         console.log(response);
         
         return res.status(200).send(response)
