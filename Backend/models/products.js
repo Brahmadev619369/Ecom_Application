@@ -41,7 +41,7 @@ const productSchema = mongoose.Schema({
         type:Boolean
     }
     
-})
+},{timestamps:true})
 
 
 const Products = mongoose.model("Products",productSchema)

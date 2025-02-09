@@ -148,7 +148,7 @@ console.log(isOpen);
                 <img src={assets.profile_icon} alt="" onClick={() => setShowProfileContent(prev => !prev)} />
                 <div className={`profileContent ${showprofileContent ? "showProfileContent" : ""}`}>
                   <div className='profileContents'>
-                    <FaCaretDown className='downBtn' />
+                    {/* <FaCaretDown className='downBtn' /> */}
                     <NavLink onClick={() => setShowProfileContent(false)} to={"/user/profile"}><button><CgProfile />Profile</button></NavLink>
                     <NavLink onClick={() => setShowProfileContent(false)} to={"/myOrders"}><button><img id='order' src={assets.Orders} alt="" />Orders</button></NavLink>
                     <NavLink onClick={() => setShowProfileContent(false)} to={"/address"}><button>< FaMapLocationDot />Address</button></NavLink>

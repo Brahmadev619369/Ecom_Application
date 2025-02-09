@@ -3,19 +3,32 @@ import React, { useContext, useEffect, useState } from 'react'
 import { StoreContext } from '../../Context'
 import "./orders.css"
 import { useNavigate } from 'react-router-dom'
+import LoaderNew from "../../loader2/LoaderNew"
+import toast from 'react-hot-toast'
+import moment from "moment"
+
 function Orders() {
   const token = localStorage.getItem("AuthToken")
   const [myOrders, setMyOrder] = useState([])
   const { currency } = useContext(StoreContext)
-  
-  const fetchMyorders = async () => {
-    const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/orders/myOrders`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+  const [isloading , setIsloading] = useState(false)
 
-    setMyOrder(res.data)
+  const fetchMyorders = async () => {
+    setIsloading(true)
+
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/orders/myOrders`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+  
+      setMyOrder(res.data)
+    } catch (error) {
+      toast.error(error.response.data.error || "Something went wrong!")
+    }finally{
+      setIsloading(false)
+    }
   }
 
   const navigate = useNavigate()
@@ -31,6 +44,9 @@ function Orders() {
 
   return (
     <div className="OrdersContainer">
+      {
+        isloading && <LoaderNew/>
+      }
                 <div className="heading">
             <div className="line1"></div>
             <h2 className='playfair-display-font'>Orders</h2>
@@ -70,8 +86,10 @@ function Orders() {
                   <div className="price">
                     <p>{currency}{item.totalAmount}</p>
                   </div>
+
                   <div className={`status ${item.orderStatus === "Delivered"? "orderDelivered":""}`}>
                     <p>{item.orderStatus}</p>
+                    <span> {moment(item?.updatedAt).format("lll")}</span>
                   </div>
 
                 </div>
@@ -79,7 +97,7 @@ function Orders() {
             })
 
           ) : (
-            <div className="hey">no</div>
+            <div className="hey">No Orders Found.</div>
           )
         }
       </div>

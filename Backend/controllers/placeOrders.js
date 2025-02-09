@@ -10,9 +10,15 @@ const PlaceOrders = require("../models/placeOrders");
 const Cart = require("../models/cart")
 const Products = require("../models/products")
 const nodemailer = require("nodemailer")
+const moment = require("moment")
 
 const generateTranscId = () => {
     return "T" + Date.now()
+}
+
+const generateInvoiceNumber = async() =>{
+    const totalOrders = await PlaceOrders.countDocuments()
+    return `24-24/${totalOrders + 1}`
 }
 
 // nodemailer transporter
@@ -173,11 +179,27 @@ const checkStatus = async (req, res) => {
                 await Cart.deleteOne({ userId: userID })
 
                 // reduce the instock qty
-                // const productId =  this.items._id
-                // const qtyToBuy = this.items.qty
-                // await Products.findByIdAndUpdate(productId , {
-                //     $inc:{inStock : -qtyToBuy}
-                // },{new:true});
+                // 1st fetch the orders
+                const recentPlacedOrd = await PlaceOrders.findOne({ transactionId: merchantTransactionId })
+                if (!recentPlacedOrd) {
+                    return res.status(400).json({ msg: "Order not found", status: "error" });
+                }
+
+                const updatedNewStock = recentPlacedOrd?.items?.map(item => {
+                    const productId = item?._id;
+                    const qtyToBuy = item?.qty;
+
+                    console.log("qtyToBuy", qtyToBuy);
+                    console.log("pid", productId);
+
+                    return Products.findByIdAndUpdate(
+                        productId,
+                        { $inc: { inStock: -qtyToBuy } },
+                        { new: true }
+                    )
+                })
+
+                await Promise.all(updatedNewStock)
 
 
                 // send order confirmation to user email 
@@ -195,29 +217,29 @@ const checkStatus = async (req, res) => {
       </thead>
       <tbody>
         ${this.items
-          .map(
-            (item) => `
+                        .map(
+                            (item) => `
           <tr>
             <td style="padding: 10px; border: 1px solid #ddd;">${item.name}</td>
             <td style="padding: 10px; border: 1px solid #ddd;">${item.size}</td>
             <td style="padding: 10px; border: 1px solid #ddd;">${item.qty}</td>
             <td style="padding: 10px; border: 1px solid #ddd;">₹${item.price.toFixed(
-              2
-            )}</td>
+                                2
+                            )}</td>
             <td style="padding: 10px; border: 1px solid #ddd;">₹${(
-              item.price * item.qty
-            ).toFixed(2)}</td>
+                                    item.price * item.qty
+                                ).toFixed(2)}</td>
           </tr>
         `
-          )
-          .join("")}
+                        )
+                        .join("")}
       </tbody>
     </table>
   </div>
 `;
 
 
-const deliveryAddressHtml = `
+                const deliveryAddressHtml = `
 <div style="width: 100%; overflow-x: auto; border: 1px solid #ddd; border-radius: 10px; padding: 10px; max-width: 500px;" >
           <p style="margin:0; color: #000000;"><strong> ${this.address.name}</strong></p>
           <p style="margin:0; color: #000000;">${this.address.address} </p>
@@ -227,15 +249,19 @@ const deliveryAddressHtml = `
 `
 
                 const mailOpt = {
-                    from: 'YourCart', 
+                    from: 'YourCart',
                     to: this.address.email,
                     subject: "Your Order Confirmation",
-                    html : ` 
+                    html: ` 
                         <div style="max-width: 600px; color: #000000; margin: auto; padding: 20px; font-family: Arial, sans-serif; border: 1px solid #ddd; border-radius: 10px;">
                             <h2 style="color: #007bff; text-align: center;">Thank You for Your Order!</h2>
                                 <p>Hello <strong style = "color :  #ff7000">${this.address.name}</strong>,</p>
                                 <p><strong>OrderID : </strong>${orderId}</p>
+                                <p><strong>Order Date : </strong>${moment(Date.now()).format("DD-MM-YYYY")}</p>
                                 <p style = "color: #000000;">We are processing your order and will notify you once it's shipped.</p>
+
+                                <p style="margin: 5px 0;"> <strong>Expected Delivery on</strong> ${moment(Date.now()).add(5, "days").format("DD-MM-YYYY")} </p>
+
                                <hr style="border: none; height: 1px; background: #ddd; margin: 20px 0;" />
                                     <p style = "color: #000000;"><strong >Order Summary:</strong></p>
 

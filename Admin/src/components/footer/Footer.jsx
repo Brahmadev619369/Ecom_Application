@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./footer.css"
 import { Link } from 'react-router-dom'
 import { FaFacebookSquare } from "react-icons/fa";
@@ -6,27 +6,39 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import logo from "../../assets/yourcartLogo.png"
+import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
 
 function Footer() {
-  const pageUp = () =>{
-    window.scroll(0,0)
-  }
+
+  
+  const navigate = useNavigate()
+
+  const pageUp = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+
+  const homePg = () => {
+    navigate("/")
+}
+
   return (
+
     <div className="footerContainer">
       <div className="topFooter">
       <div className="firstSection">
-       <img src={logo} alt="" />
-       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quibusdam minus blanditiis vero recusandae vitae maiores eaque nisi veniam amet?</p>
+       <img src={logo} alt="" onClick={()=>homePg()} />
+       <p>YourCart - a Retailer site of mens and women casual shirts, T-Shirts, Trousers, Jeans, Shorts in Mumbai</p>
       </div>
 
       <div className="secondSection">
         <h2>COMPANY</h2>
         <div>
         <ul>
-          <li><Link>About</Link></li>
-          <li><Link>News</Link></li>
-          <li><Link>Contact</Link></li>
-          <li><Link>Careers</Link></li>
+          <li><Link to={"/about"}>About</Link></li>
+          <li><Link to={"/terms-and-conditions"}>Terms and Conditions</Link></li>
+          <li><Link to={"/contact"}>Contact</Link></li>
         </ul>
         </div>
       </div>
@@ -46,14 +58,40 @@ function Footer() {
         </div>
         <div className="socialLogoPageUp">
         <div className="socialLogo">
-          <Link><div className="socialIcon"><FaFacebookSquare className='socialIcon'/></div></Link>
-          <Link><div className="socialIcon"><FaSquareXTwitter className='socialIcon'/></div></Link>
-          <Link><div className="socialIcon"><FaInstagramSquare className='socialIcon'/></div></Link>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
+              <div className="socialIcon">
+                <FaFacebookSquare className="socialIcon" />
+              </div>
+            </a>
+            <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
+            <div className="socialIcon">
+              <FaSquareXTwitter className='socialIcon' />
+            </div>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+            <div className="socialIcon">
+              <FaInstagramSquare className='socialIcon' />
+              </div>
+            </a>
         </div>
 
-        <div className="pageUp">
-          <p onClick={pageUp}>Page Up </p><FaArrowAltCircleUp/>
-        </div>
+        {/* <div className="pageUp" onClick={pageUp}>
+          <p >Page Up </p><FaArrowAltCircleUp/>
+        </div> */}
+
+
+<motion.div className='pageUp'
+      onClick={pageUp}
+      // initial={{opacity : 0,y:50}}
+      animate = {{opacity:1,y:0}}
+      transition={{duration :0.5 ,ease:"easeout"}}
+      whileHover={{scale:1.1}}
+      whileTap={{scale:0.9}}>
+      <p>Page Up</p> <FaArrowAltCircleUp />
+      </motion.div>
+
+
+
         </div>
       </div>
     </div>

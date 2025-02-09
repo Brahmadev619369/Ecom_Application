@@ -11,7 +11,7 @@ const wishlistScheme = mongoose.Schema({
             ref:"Products"
         }
     ]
-})
+},{timestamps:true})
 
 
 const Wishlist = mongoose.model("Wishlist",wishlistScheme)

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext ,useEffect} from 'react'
 import Navbar from './navbar/Navbar'
 import Footer from './footer/Footer'
 import { Navigate, Outlet } from 'react-router-dom';
@@ -15,6 +15,11 @@ function Layout() {
     if(!token){
         return <Navigate to = "/login"/>
     }
+
+    useEffect(()=>{
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },[])
+  
 
   return (
     <div className='layoutContainer'>

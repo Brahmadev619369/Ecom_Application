@@ -1,6 +1,6 @@
 const Products = require("../models/products");
 const { uploadOnCloudinary } = require("../utils/cloudinary");
-
+const moment = require("moment")
 
 const addProducts = async (req, res) => {
     const { name, description, price, mrp, sizes, category, subCategory, bestSeller,inStock } = req.body;
@@ -51,7 +51,7 @@ const addProducts = async (req, res) => {
 
 
 const fetchProducts = async(req,res) =>{
-    console.log("hello")
+    
     
     try {
         const response = await Products.find()

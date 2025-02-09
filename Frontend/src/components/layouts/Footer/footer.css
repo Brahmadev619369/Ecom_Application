@@ -99,12 +99,12 @@ box-sizing: border-box;
     }
 
     .secondSection h2{
-        font-size:18px ;
+        font-size:16px ;
         margin-bottom: 5px;
     }
 
     .thirdSection h2{
-        font-size:18px ;
+        font-size:16px ;
         margin-bottom: 5px;
     }
 
@@ -126,13 +126,13 @@ box-sizing: border-box;
     }
 
     .secondSection h2{
-        font-size:17px ;
+        font-size:15px ;
         margin-bottom: 5px;
         
     }
 
     .thirdSection h2{
-        font-size:17px ;
+        font-size:15px ;
         margin-bottom: 5px;
     }
 
@@ -162,5 +162,10 @@ box-sizing: border-box;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+    }
+
+    .bottomFooter p {
+        font-size: 13px;
+        color: rgb(103, 103, 103);
     }
 }

@@ -5,6 +5,7 @@ import "./status.css"
 import { storeContext } from '../../context/context';
 import OrdersDetails from '../orders/OrdersDetails';
 import { ToastContainer, toast } from 'react-toastify';
+import Loader from "../../loader/Loader"
 
 function Status() {
     const [otp, setOtp] = useState("")
@@ -14,6 +15,8 @@ function Status() {
     const [showOtpInput, setShowOtpInput] = useState(false)
     const [items,setItems] = useState([])
     const { currency } = useContext(storeContext)
+    const token = localStorage.getItem("AuthToken")
+    const [isloading,setIsloading] = useState(false)
 
     // set scanner configs
     useEffect(() => {
@@ -45,13 +48,19 @@ function Status() {
     useEffect(() => {
         const fetchOrder = async () => {
           if (!orderId) return;
+          setIsloading(true)
           try {
             const response = await axios.get(
-              `${import.meta.env.VITE_EXPRESS_BASE_URL}/orders/${orderId}`
-            );
+              `${import.meta.env.VITE_EXPRESS_BASE_URL}/orders/${orderId}`,{
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+              });
             setOrderDetails(response.data[0]);
           } catch (error) {
             console.error(error);
+          }finally{
+            setIsloading(false)
           }
         };
         fetchOrder();
@@ -66,6 +75,7 @@ function Status() {
 
     // update status
     const handleToUpdateStatus = async() =>{
+        setIsloading(true)
         try {
             const res = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/update-status`,{orderId,status})
             
@@ -80,11 +90,14 @@ function Status() {
         } catch (error) {
             console.log(error);
             
+        }finally{
+            setIsloading(false)
         }
     }
     
     // otp submit
     const handleToSubmitOtp = async() =>{
+        setIsloading(true)
         try {
             const res = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/verify-status`,{orderId,otp})
             toast.success(res.data.message);
@@ -92,12 +105,17 @@ function Status() {
             
         } catch (error) {
             console.log(error);
+        }finally{
+            setIsloading(false)
         }
     }
 
 
     return (
         <div className="statusMainContainer">
+            {
+                isloading && <Loader/>
+            }
             <ToastContainer/>
             <div className="heading">
                 <div className="line1"></div>

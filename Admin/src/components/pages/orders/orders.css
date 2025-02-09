@@ -87,10 +87,14 @@
     color: green;
 }
 
+.status span{
+    font-size: 12px;
+}
+
 
 @media (max-width:570px) {
     .ordersCards .ordersCard  p{
-        font-size: 12px;
+        font-size: 11px;
     }
 
     .ordersCards .ordersCard .nameAndOther .overlayName{
@@ -128,7 +132,14 @@
 
     .ordersCards .ordersCard{
         width: 70vw}
+
+        
+        .status span{
+            font-size: 10px;
+        }
 }
+
+
 
 @media (max-width:420px) {
     .ordersCards .ordersCard  p{
@@ -166,5 +177,9 @@
     .ordersCards .ordersCard img{
         height: 105px;
         border-radius: 5px;
+    }
+
+    .status span{
+        font-size: 9px;
     }
 }

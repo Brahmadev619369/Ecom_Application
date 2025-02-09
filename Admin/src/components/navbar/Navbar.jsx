@@ -35,6 +35,10 @@ function Navbar() {
         navigate("/login")
     }
 
+    const homePg = () => {
+        navigate("/")
+    }
+
 
 
 
@@ -43,8 +47,8 @@ function Navbar() {
         <div className="nav-container">
 
             <div className="navBar">
-                <div className="logo">
-                    <img src={logo} alt="" />
+                <div className="logo" onClick={()=>homePg()}>
+                    <img src={logo} />
                 </div>
                 {auth && auth.profile && (
                     <div className="profile" ref={dropdownRef} onClick={() => setDropDown(!dropDown)}>

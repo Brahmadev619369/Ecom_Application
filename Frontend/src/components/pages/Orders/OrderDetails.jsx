@@ -9,6 +9,8 @@ import Invoice from '../../invoice/Invoice'
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import moment from 'moment'
+import LoaderNew from "../../loader2/LoaderNew"
+
 function OrderDetails() {
     const { orderId } = useParams()
     const { currency } = useContext(StoreContext)
@@ -21,8 +23,8 @@ function OrderDetails() {
     const [totalMrp, setTotalMrp] = useState(0)
     const [sellingPrice, setSellingPrice] = useState(0)
     const [status, setStatus] = useState("")
-    const [isgenerating,setIsgenerating] = useState(false)
-
+    const [isgenerating, setIsgenerating] = useState(false)
+    const [isloading, setIsloading] = useState(false)
 
     const fetchOrderDetails = async () => {
         try {
@@ -88,32 +90,32 @@ function OrderDetails() {
     // logic to download invoice
     const invoiceRef = useRef(null);
 
-    const generatePDF = async() => {
+    const generatePDF = async () => {
         setIsgenerating(true)
-        
+
         try {
             const input = invoiceRef.current;
-        if (!input) {
-            console.error("Invoice reference not found!");
-            return;
-        }
- // Capture the HTML element as an image
-        const canvas = await html2canvas(input,{scale:2})
-        const imgData = canvas.toDataURL("image/png")
+            if (!input) {
+                console.error("Invoice reference not found!");
+                return;
+            }
+            // Capture the HTML element as an image
+            const canvas = await html2canvas(input, { scale: 2 })
+            const imgData = canvas.toDataURL("image/png")
 
-         // Create a PDF
-         const pdf = new jsPDF()
-         const width = pdf.internal.pageSize.getWidth();
-         const height = (canvas.height * width) /canvas.width;
+            // Create a PDF
+            const pdf = new jsPDF()
+            const width = pdf.internal.pageSize.getWidth();
+            const height = (canvas.height * width) / canvas.width;
 
-         // Add the image to the PDF
-         pdf.addImage(imgData,"PNG",0,0,width,height)
-         pdf.save(`invoice-${orderId}`)
+            // Add the image to the PDF
+            pdf.addImage(imgData, "PNG", 0, 0, width, height)
+            pdf.save(`invoice-${orderId}`)
 
         } catch (error) {
             console.error('Error generating PDF:', error);
-            
-        }finally{
+
+        } finally {
             setIsgenerating(false)
         }
     };
@@ -123,6 +125,9 @@ function OrderDetails() {
 
     return (
         <div className="order-Details-MainContainer">
+            {
+                isloading && <LoaderNew />
+            }
             <div className="heading">
                 <div className="line1"></div>
                 <h2 className='playfair-display-font'>Order Details</h2>
@@ -130,14 +135,14 @@ function OrderDetails() {
             </div>
 
             <div className='invoice-hide'>
-                <Invoice ref={invoiceRef} 
+                <Invoice ref={invoiceRef}
                     items={items}
                     address={address}
                     totalAmt={totalAmt}
                     deliveryFee={deliveryFee}
                     orderDetails={orderDetails}
-                    totalMrp = {totalMrp}
-                    totalSellingPrice = {sellingPrice} />
+                    totalMrp={totalMrp}
+                    totalSellingPrice={sellingPrice} />
             </div>
 
             <div className="left-right-container">
@@ -178,7 +183,12 @@ function OrderDetails() {
                             {status}
                         </div>
                         <div className="statusDate">
-                        <span>{moment(orderDetails.orderDate).format("Do MMM 'YY")}</span>
+                            On
+                            {
+                                status === "Order Placed" ? (
+                                    <span> {moment(orderDetails.orderDate).format("lll")}</span>
+                                ) : (<span> {moment(orderDetails.updatedAt).format("lll")}</span>)
+                            }
 
                         </div>
                     </div>
@@ -186,12 +196,12 @@ function OrderDetails() {
 
                 <div className="right-Container">
                     <div className="invoiceContainer">
-                        <div className="invoiceBtn">
+                        <div className={`invoiceBtn ${status !== "Delivered" ? "disableInvoiceBtn" : ""}`}>
                             <p className='invoce' onClick={generatePDF}><FaFileInvoice className='invcIcon' />
-                            {
-                                isgenerating ? " Generating Invoice.." :" Download Invoice"
-                            }
-                           </p>
+                                {
+                                    isgenerating ? " Generating Invoice.." : " Download Invoice"
+                                }
+                            </p>
                         </div>
                     </div>
                     <div className="addAndPriceContainer">

@@ -76,8 +76,8 @@
   .profileContent{
     position: absolute;
     background-color: white;
-    padding-top: 20px;
     border-radius: 10px;
+    padding: 7px 0;
     transform: translateY(-10px);
     transition: all 0.3s ease-in-out;
     right: 0;
@@ -106,32 +106,30 @@
     display: flex;
     gap: 5px;
     flex: 1;
-    /* height: 30px; */
     font-size: 15px;
     background-color: transparent;
     color: black;
     border: none;
     outline: none;
-    /* border-radius: 5px; */
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
 
-  .profileContents button:hover{
+  .profileContents a:hover{
     background-color: rgb(237, 235, 235);
   } 
   .profileContents a{
     display: flex;
-    /* padding: 5px 10px; */
+    padding: 5px 10px;
 
   }
 
-  .profile .downBtn{
+  /* .profile .downBtn{
     position: absolute;
     right: 10px;
     top: -15px;
     padding: 0;
-  }
+  } */
 
   
   #order{

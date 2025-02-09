@@ -7,13 +7,18 @@ import { useNavigate } from 'react-router-dom';
 import { ImBin } from "react-icons/im";
 import ConfirmMessage from '../../confirm_loader/ConfirmMessage';
 import { ToastContainer,toast } from 'react-toastify';
+import { Navigate } from 'react-router-dom'
 
 function ItemsList() {
-    const { currency } = useContext(storeContext)
+    const { currency,auth } = useContext(storeContext)
     const [products, setproducts] = useState([])
     const navigate = useNavigate()
     const [showConfirmPopUp,setShowConfirmPopUp] = useState(false)
     const [productId,setProductId] = useState(null)
+
+    if (auth?.role === "Worker") {
+        return <Navigate to="/login" />
+    }
 
     const fetchData = async () => {
         try {

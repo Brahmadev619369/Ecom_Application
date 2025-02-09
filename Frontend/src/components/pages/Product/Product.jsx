@@ -11,6 +11,8 @@ import RelatedProducts from '../../relatedProducts/RelatedProducts';
 // import { toast } from 'react-toastify';
 import toast, { Toaster } from 'react-hot-toast';
 import { FaHeart } from "react-icons/fa";
+import axios from 'axios';
+import LoaderNew from '../../loader2/LoaderNew';
 
 function Product() {
   const { productId } = useParams()
@@ -22,26 +24,49 @@ function Product() {
   const [wishlist, setWishlist] = useState([])
   const [iswishlisted, setIswishlisted] = useState(false)
   const token = localStorage.getItem("AuthToken")
+  const [isloading, setIsloading] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [productId]);
 
-  const fetchProductData = async () => {
-    products.map((item) => {
-      if (item._id === productId) {
-        setProductData(item)
-        setImage(item.image[0])
-      }
-    })
+  // const fetchProductData = async () => {
+  //   products.map((item) => {
+  //     if (item._id === productId) {
+  //       setProductData(item)
+  //       setImage(item.image[0])
+  //     }
+  //   })
+  // }
+
+
+  // useEffect(() => {
+  //   fetchProductData()
+  // }, [])
+
+  // console.log(productData);
+
+  // fetch data from db
+  const fetchData = async() =>{
+    setIsloading(true)
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/products/${productId}`)
+      console.log(res.data);
+      setProductData(res.data)
+      setImage(res.data?.image[0])
+      
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.error || "Something went wrong!")
+      
+    }finally{
+      setIsloading(false)
+    }
   }
-
-
-  useEffect(() => {
-    fetchProductData()
-  }, [productId])
-
-
+  
+useEffect(()=>{
+  fetchData()
+},[productId])
 
   const discountPercentage = (mrp, price) => {
     return Math.round(((mrp - price) / mrp) * 100, 2)
@@ -87,6 +112,9 @@ function Product() {
 
   return (
     <div className="ProductDetailsMainContainer">
+      {
+        isloading && <LoaderNew/>
+      }
       <Toaster />
       <div className="ProductDetailsContainer">
         <div className='productImgs'>

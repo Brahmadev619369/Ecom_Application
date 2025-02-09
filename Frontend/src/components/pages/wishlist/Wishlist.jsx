@@ -2,27 +2,30 @@ import React, { useContext, useEffect, useState } from 'react'
 import { StoreContext } from '../../Context'
 import "./wishlist.css"
 import { useNavigate } from 'react-router-dom'
+import { FaHeart } from "react-icons/fa";
+import LoaderNew from '../../loader2/LoaderNew';
 
 function Wishlist() {
     const token = localStorage.getItem("AuthToken")
-    const { getWishlist, removeToWishlist ,currency} = useContext(StoreContext)
+    const { getWishlist, removeToWishlist, currency,wishlistLoader } = useContext(StoreContext)
     const [wishlist, setWishlist] = useState([])
     const [showDetails, setShowDetails] = useState(false);
     const navigate = useNavigate()
 
-
-    const handleOverlay = (e) =>{
+    const handleOverlay = (e) => {
         e.stopPropagation();
         setShowDetails(!showDetails)
     }
     const handleCardClick = (productId) => {
-        navigate(`/product/${productId}`); 
-      };
+        navigate(`/product/${productId}`);
+    };
 
     useEffect(() => {
-        getWishlist(token).then((data) => {
-            setWishlist(data?.products || [])
-        })
+        if(token){
+            getWishlist(token).then((data) => {
+                setWishlist(data?.products || [])
+            })
+        }
 
     }, [token])
 
@@ -30,9 +33,20 @@ function Wishlist() {
         return (((mrp - price) / mrp) * 100).toFixed(2)
     }
 
+    const handleToRemove = async (e, id) => {
+        e.stopPropagation();
+        await removeToWishlist(id, token).then(() => {
+            setWishlist((prev) => prev.filter((item) => item._id !== id))
+        })
+    }
+
     return (
         <div className='wishlistMainContainer'>
-                        <div className="heading">
+{
+    wishlistLoader && <LoaderNew/>
+}
+
+            <div className="heading">
                 <div className="line1"></div>
                 <h2 className='playfair-display-font'>Wishlist </h2>
                 <div className="line1"></div>
@@ -43,9 +57,12 @@ function Wishlist() {
                         wishlist && wishlist.length > 0 ? (
                             wishlist.map((item, index) => {
                                 return (
-                                    <div className={'wishlist-card'} onClick={()=>handleCardClick(item._id)}>
+                                    <div className={'wishlist-card'} onClick={() => handleCardClick(item._id)}>
                                         <div className="img">
                                             <img src={item?.image?.[0]} alt="" />
+                                            <button className='wishlistBtnRed' onClick={(e) => handleToRemove(e, item._id)}>
+                                                <FaHeart />
+                                            </button>
                                         </div>
                                         <div className="title" onClick={handleOverlay}>
                                             <p>{item.name}</p>
@@ -53,22 +70,23 @@ function Wishlist() {
                                         <div className="overlay" >
                                             <div className="prices">
 
-<div className='flex-row'>
-<div>
-                                                    {currency}{item.price}
-                                                </div>
+                                                <div className='flex-row'>
+                                                    <div>
+                                                        {currency}{item.price}
+                                                    </div>
 
-                                                <div className='linethrough'>
-                                                    {currency}{item.Mrp}
-                                                </div>
+                                                    <div className='linethrough'>
+                                                        {currency}{item.Mrp}
+                                                    </div>
 
-</div>
+                                                </div>
 
                                                 <div className='dics'>
 
                                                     <p>{
                                                         discountPer(item.Mrp, item.price)
                                                     }% off</p>                             </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -76,7 +94,7 @@ function Wishlist() {
                             })
 
                         ) : (
-                            <div>No Wishlist Found</div>
+                            <div className='nowishlist'>No Wishlist Found</div>
                         )
                     }
                 </div>

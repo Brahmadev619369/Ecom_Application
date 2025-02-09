@@ -92,15 +92,45 @@ const registerUser = async (req, res) => {
 
         const mailOption = {
             from: '"YourCart.." <raibrahmadev508@gmail.com>',
-            to: email,
+            to: newEmail,
             subject: "Account Activation",
             html: `
-            <b>Dear ${name},</b> <br> 
-        <p>Please activate your account by clicking the following link:
-        <a href="${process.env.FRONTEND}/users/register/activation/${activationToken}">Activate Account</a>.</p> 
-        <br> 
-        <p>If you didn't register this, please ignore this email.</p>`
-        }
+            <div style="
+                font-family: Arial, sans-serif;
+                max-width: 500px;
+                margin: 0 auto;
+                text-align: center;
+                background: #f9f9f9;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            ">
+                <h2 style="color: #2c3e50;">🚀 Activate Your Account</h2>
+                <p style="color: #555; font-size: 16px;">Dear <strong>${name}</strong>,</p>
+                <p style="color: #555; font-size: 16px;">Please activate your account by clicking the button below:</p>
+                
+                <a href="${process.env.FRONTEND}/users/register/activation/${activationToken}" style="
+                    display: inline-block;
+                    padding: 12px 20px;
+                    margin: 20px 0;
+                    color: white;
+                    background: #2980b9;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border-radius: 5px;
+                    transition: 0.3s;
+                ">Activate Account</a>
+                
+                <p style="color: #777; font-size: 14px;">If you didn’t register for this, please ignore this email.</p>
+                
+                <hr style="border: none; height: 1px; background: #ddd; margin: 20px 0;" />
+                
+                <p style="color: #555;">Best Regards,</p>
+                <p style="font-size: 18px; font-weight: bold; color: #2980b9;">YourCart Team</p>
+            </div>
+        `
+        };
 
         transporter.sendMail(mailOption, async (err, info) => {
             if (err) {
@@ -230,12 +260,45 @@ const forgotPassword = async (req, res) => {
             to: email,
             subject: "Password Reset",
             html: `
-             <b>Dear ${user.name},</b> <br> 
-        <p>You requested a password reset. Click the link to reset your password: 
-        <a href="http://localhost:5173/users/reset-password/${resetToken}">Reset Password</a>.</p> 
-        <br> 
-        <p>If you didn't request this, please ignore this email.</p>
-`
+        <div style="
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        ">
+            <h2 style="color: #e74c3c;">🔒 Password Reset Request</h2>
+            <p style="color: #555; font-size: 16px;">Dear <strong>${user.name}</strong>,</p>
+            <p style="color: #555; font-size: 16px;">
+                You requested a password reset. Click the button below to reset your password:
+            </p>
+            
+            <a href="${process.env.FRONTEND}/users/reset-password/${resetToken}" style="
+                display: inline-block;
+                padding: 12px 20px;
+                margin: 20px 0;
+                color: white;
+                background: #e74c3c;
+                text-decoration: none;
+                font-size: 16px;
+                font-weight: bold;
+                border-radius: 5px;
+                transition: 0.3s;
+            ">Reset Password</a>
+
+            <p style="color: #777; font-size: 14px;">
+                If you didn’t request this, please ignore this email. Your account remains secure.
+            </p>
+            
+            <hr style="border: none; height: 1px; background: #ddd; margin: 20px 0;" />
+            
+            <p style="color: #555;">Best Regards,</p>
+            <p style="font-size: 18px; font-weight: bold; color: #2980b9;">YourCart Team</p>
+        </div>
+    `
         }
 
         transporter.sendMail(mailOption, (err, info) => {
@@ -331,7 +394,6 @@ const changeProfilePicture = async (req, res) => {
 
         // after update delete old 
         // await deleteProfileOnCloudinary(user.profile_public_id)
-console.log(response);
 
         return res.status(200).send({
             data: response,
@@ -519,11 +581,45 @@ const updateUserDetails = async (req, res) => {
                 to: lowerEmail,
                 subject: "Account Verification",
                 html: `
-                    <b>Dear ${userName},</b>
-                    <p>Please verify your account by clicking the following link:</p>
-                    <a href="${process.env.FRONTEND}/users/register/activation/${activationToken}">Activate Account</a>
-                    <p>If you did not request this change, please contact support.</p>
-                `,
+                <div style="
+                    font-family: Arial, sans-serif;
+                    max-width: 500px;
+                    margin: 0 auto;
+                    text-align: center;
+                    background: #f9f9f9;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+                ">
+                    <h2 style="color: #27ae60;">✅ Verify Your Account</h2>
+                    <p style="color: #555; font-size: 16px;">Dear <strong>${userName}</strong>,</p>
+                    <p style="color: #555; font-size: 16px;">
+                        Please verify your account by clicking the button below:
+                    </p>
+                    
+                    <a href="${process.env.FRONTEND}/users/register/activation/${activationToken}" style="
+                        display: inline-block;
+                        padding: 12px 20px;
+                        margin: 20px 0;
+                        color: white;
+                        background: #27ae60;
+                        text-decoration: none;
+                        font-size: 16px;
+                        font-weight: bold;
+                        border-radius: 5px;
+                        transition: 0.3s;
+                    ">Activate Account</a>
+        
+                    <p style="color: #777; font-size: 14px;">
+                        If you did not request this change, please contact support.
+                    </p>
+                    
+                    <hr style="border: none; height: 1px; background: #ddd; margin: 20px 0;" />
+                    
+                    <p style="color: #555;">Best Regards,</p>
+                    <p style="font-size: 18px; font-weight: bold; color: #2980b9;">YourCart Team</p>
+                </div>
+            `
             };
 
             transporter.sendMail(mailOption, (err, info) => {
@@ -614,11 +710,45 @@ const adminRegister = async (req, res) => {
             to: email,
             subject: "Account Activation",
             html: `
-            <b>Dear ${name},</b> <br> 
-        <p>Please activate your account by clicking the following link:
-        <a href="${process.env.FRONTEND}/users/register/activation/${activationToken}">Activate Account</a>.</p> 
-        <br> 
-        <p>If you didn't register this, please ignore this email.</p>`
+            <div style="
+                font-family: Arial, sans-serif;
+                max-width: 500px;
+                margin: 0 auto;
+                text-align: center;
+                background: #f9f9f9;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            ">
+                <h2 style="color: #27ae60;">✅ Verify Your Account</h2>
+                <p style="color: #555; font-size: 16px;">Dear <strong>${name}</strong>,</p>
+                <p style="color: #555; font-size: 16px;">
+                    Please verify your account by clicking the button below:
+                </p>
+                
+                <a href="${process.env.FRONTEND}/users/register/activation/${activationToken}" style="
+                    display: inline-block;
+                    padding: 12px 20px;
+                    margin: 20px 0;
+                    color: white;
+                    background: #27ae60;
+                    text-decoration: none;
+                    font-size: 16px;
+                    font-weight: bold;
+                    border-radius: 5px;
+                    transition: 0.3s;
+                ">Activate Account</a>
+    
+                <p style="color: #777; font-size: 14px;">
+                    If you did not request this change, please contact support.
+                </p>
+                
+                <hr style="border: none; height: 1px; background: #ddd; margin: 20px 0;" />
+                
+                <p style="color: #555;">Best Regards,</p>
+                <p style="font-size: 18px; font-weight: bold; color: #2980b9;">YourCart Team</p>
+            </div>
+        `
         }
 
         transporter.sendMail(mailOption, async (err, info) => {

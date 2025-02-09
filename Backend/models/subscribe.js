@@ -5,7 +5,7 @@ const subscribeScheme = mongoose.Schema({
         type:String,
         require:true
     }
-})
+},{timestamps:true})
 
 
 const Subscribe = mongoose.model("Subscribe",subscribeScheme)

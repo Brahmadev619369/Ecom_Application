@@ -11,7 +11,7 @@ function BestSellers() {
     const bestSellerProducts = products.filter((item)=>item.bestseller) 
     useEffect(()=>{
         setBestSellers(bestSellerProducts)
-    },[])
+    },[products])
     
     
   return (

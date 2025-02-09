@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
@@ -8,7 +8,10 @@ import { StoreContext } from '../../Context'
 
 function Layout() {
   const {showSearchBtn} = useContext(StoreContext)
-
+  
+useEffect(()=>{
+  window.scrollTo({ top: 0, behavior: "smooth" });
+},[])
   
   return (
     <>

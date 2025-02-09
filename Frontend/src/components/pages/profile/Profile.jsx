@@ -10,6 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 import { FaCheck } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import "./profile.css"
+import LoaderNew from '../../loader2/LoaderNew';
 
 function Profile() {
     const token = localStorage.getItem("AuthToken")
@@ -17,6 +18,8 @@ function Profile() {
     const [showCheckBtn, setShowCheckBtn] = useState(false)
     const [user, setUser] = useState({})
     const navigate = useNavigate()
+    const [isloading,setIsloading] = useState(false)
+
 
     const {
         register,
@@ -34,6 +37,7 @@ function Profile() {
 
     // fetch user details 
     const fetchUserDetails = async () => {
+        setIsloading(true)
         try {
             const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/users/profile-details`, {
                 headers: {
@@ -46,13 +50,15 @@ function Profile() {
 
             // set default value
             reset({
-                userName:res.data.name,
+                userName: res.data.name,
                 email: res.data.email
             })
 
         } catch (error) {
             console.log(error);
 
+        }finally{
+            setIsloading(false)
         }
     }
 
@@ -68,63 +74,75 @@ function Profile() {
         setShowCheckBtn(true)
     }
 
-    const handleToUpdatePicture = async(e) => {
+    const handleToUpdatePicture = async (e) => {
         e.preventDefault();
-        setShowCheckBtn(false); 
-        try{
+        setShowCheckBtn(false);
+        setIsloading(true)
+        try {
             const ProfilePic = new FormData()
-            ProfilePic.append("image",avatar)
+            ProfilePic.append("image", avatar)
 
-            const res = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/users/change-profile`,ProfilePic,{
-                headers:{
+            const res = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/users/change-profile`, ProfilePic, {
+                headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
 
-            if(res.status===200){
-                setAvatar(res.data.data.profileURL)
-            setUser((prev)=>({
-                ...prev,
-                profileURL : res.data.data.profileURL
-            }))
-            toast.success(res.data.msg)
-            setShowCheckBtn(false)
+            if (res.status === 200 && res.data.data?.profileURL) {
+                // setAvatar(res.data.data.profileURL);
+                // setUser((prev) => ({
+                //     ...prev,
+                //     profileURL: res.data.data.profileURL
+                // }));
+                fetchUserDetails()
+                toast.success(res.data.msg || "Profile picture updated successfully!");
+            } else {
+                throw new Error("Invalid response from server.");
             }
-            
-            // after succcess update state
-            
-            
-        }catch(error){
+
+
+
+        } catch (error) {
             console.log(error);
-    toast.error("Failed to update profile picture. Please try again.");
-    setShowCheckBtn(false);
+            toast.error("Failed to update profile picture. Please try again.");
+         
+        }finally {
+            setShowCheckBtn(false);
+            setIsloading(false)
         }
     }
 
 
-    const handleToUpdateUserDetails = async(data) =>{
+    const handleToUpdateUserDetails = async (data) => {
+        setIsloading(true)
         try {
-            const response = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/users/edit-user`,data,{
-                headers:{
-                    Authorization:`Bearer ${token}`
+            const response = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/users/edit-user`, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`
                 }
             })
             console.log(response);
-            
+
             // setUser(response.data);
-            
+
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.error)
         }
+        finally{
+            setIsloading(false)
+        }
     }
 
-console.log(avatar);
+    console.log(avatar);
 
 
     return (
         <div className='profileContainer'>
-            <ToastContainer/>
+            {
+                isloading && <LoaderNew/>
+            }
+            <ToastContainer />
             <div className="profileDetails">
                 <div className="profileAvatar">
                     <img src={avatar} alt="Avatar" />
@@ -147,36 +165,36 @@ console.log(avatar);
                 </form>
             </div>
 
-<div className="userName crimson-text-semibold ">
-    <h2>{user.name}</h2>
-</div>
+            <div className="userName crimson-text-semibold ">
+                <h2>{user.name}</h2>
+            </div>
 
             <div className="userDetailsContainer">
                 <div className="userDetails">
-                   <form onSubmit={handleSubmit(handleToUpdateUserDetails)} className='userDetails'>
-                   <div className="userName">
-                        <input type="text" {...register("userName")} placeholder="Enter FullName " />
-                    </div>
+                    <form onSubmit={handleSubmit(handleToUpdateUserDetails)} className='userDetails'>
+                        <div className="userName">
+                            <input type="text" {...register("userName")} placeholder="Enter FullName " />
+                        </div>
 
-                    <div className="email">
-                    <input type="email" {...register("email")} placeholder="Enter email " />
-                    </div>
+                        <div className="email">
+                            <input type="email" {...register("email")} placeholder="Enter email " />
+                        </div>
 
-                    <div className="password">
-                    <input type="password" {...register("currentPassword")} placeholder="Enter Current Password " />
-                    </div>
+                        <div className="password">
+                            <input type="password" {...register("currentPassword")} placeholder="Enter Current Password " />
+                        </div>
 
-                    <div className="password">
-                    <input type="password" {...register("newPassword")} placeholder="Enter New Password " />
-                    </div>
+                        <div className="password">
+                            <input type="password" {...register("newPassword")} placeholder="Enter New Password " />
+                        </div>
 
-                    <div className="password">
-                    <input type="password" {...register("newConfirmPassword")} placeholder="Enter Confirm New Password " />
-                    </div>
+                        <div className="password">
+                            <input type="password" {...register("newConfirmPassword")} placeholder="Enter Confirm New Password " />
+                        </div>
 
-                    <input className='btn' disabled={isSubmitting} type="submit" />
-                    {isSubmitting && <div className='loading'></div>}
-                   </form>
+                        <input className='btn' disabled={isSubmitting} type="submit" />
+                        {isSubmitting && <div className='loading'></div>}
+                    </form>
 
                 </div>
             </div>

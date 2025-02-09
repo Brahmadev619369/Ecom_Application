@@ -1,28 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { FaCloudUploadAlt } from "react-icons/fa";
 import "./additems.css"
 import axios from 'axios';
-import { ToastContainer,toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../loader/Loader';
+import { Navigate } from 'react-router-dom'
+import { storeContext } from '../../context/context'
 
 function AddItems() {
-
-    const [productData, setProductData] = useState({
+    const initialProductData = {
         name: "",
         price: "",
         mrp: "",
         description: "",
         images: [],
-        category : "Men",
+        category: "Men",
         subCategory: "Topwear",
-        inStock : ""
-    })
-      const [loader,setLoader] = useState(false)
-    const [bestSeller,setBestSeller] = useState(false)
+        inStock: ""
+    };
+
+    const [productData, setProductData] = useState(initialProductData);
+
+
+    const [loader, setLoader] = useState(false)
+    const [bestSeller, setBestSeller] = useState(false)
     const [sizes, setSizes] = useState([])
     const [previewImg, setPreviewImg] = useState([])
+    const { auth } = useContext(storeContext)
 
-    console.log(productData);
+    if (auth?.role === "Worker") {
+        return <Navigate to="/login" />
+    }
+
+    // console.log(productData);
 
 
 
@@ -34,7 +44,7 @@ function AddItems() {
         }
 
         // Clear previous image previews to avoid memory leaks
-    previewImg.forEach((url) => URL.revokeObjectURL(url));
+        previewImg.forEach((url) => URL.revokeObjectURL(url));
 
         // set images data
         setProductData({
@@ -46,62 +56,64 @@ function AddItems() {
         setPreviewImg(imgPreview)
     }
 
-    const handleToChange = (e) =>{
-       const {name , value} = e.target
+    const handleToChange = (e) => {
+        const { name, value } = e.target
         setProductData({
             ...productData,
-            [name]:value
+            [name]: value
         })
     }
-// prepare data and submit
+    // prepare data and submit
 
-const handleToSubmit = async(e) =>{
-    e.preventDefault()
-    setLoader(true)
-    const data = new FormData()
-    data.append("name",productData.name)
-    data.append("price",productData.price)
-    data.append("mrp",productData.mrp)
-    data.append("description",productData.description)
-    data.append("category",productData.category)
-    data.append("subCategory",productData.subCategory)
-    data.append("bestSeller",bestSeller)
-    data.append("inStock",productData.inStock)
+    const handleToSubmit = async (e) => {
+        e.preventDefault()
+        setLoader(true)
+        const data = new FormData()
+        data.append("name", productData.name)
+        data.append("price", productData.price)
+        data.append("mrp", productData.mrp)
+        data.append("description", productData.description)
+        data.append("category", productData.category)
+        data.append("subCategory", productData.subCategory)
+        data.append("bestSeller", bestSeller)
+        data.append("inStock", productData.inStock)
 
-    sizes.forEach((size)=>data.append("sizes[]",size))
+        sizes.forEach((size) => data.append("sizes[]", size))
 
-    productData.images.forEach((image)=>data.append("image",image))
+        productData.images.forEach((image) => data.append("image", image))
 
-    try {
-        const response = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/products/add-products`,data)
-        toast.success(response.data.message);
-        console.log(response.data.message);
-        setLoader(false)
-        
-    } catch (error) {
-        console.log(error.response.data.error);
-        setLoader(false)
-        toast.error(error.response.data.error);
-        console.log(error);
-     
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/products/add-products`, data)
+            toast.success(response.data.message);
+            console.log(response.data.message);
+            setProductData(initialProductData);
+            setLoader(false)
+
+
+        } catch (error) {
+            console.log(error.response.data.error);
+            setLoader(false)
+            toast.error(error.response.data.error);
+            console.log(error);
+
+        }
     }
-}
 
 
 
 
     return (
         <div className='addItemsMainContainer'>
-                  {
-        loader && <Loader/>
-      }
-                            <div className="heading">
-            <div className="line1"></div>
-            <h2 className='playfair-display-font'>Add Products</h2>
-            <div className="line1"></div>
-          </div>
-          
-          <ToastContainer/>
+            {
+                loader && <Loader />
+            }
+            <div className="heading">
+                <div className="line1"></div>
+                <h2 className='playfair-display-font'>Add Products</h2>
+                <div className="line1"></div>
+            </div>
+
+            <ToastContainer />
             <div className="addItems">
                 <form className="items" onSubmit={handleToSubmit}>
                     <div className="images flex-col">
@@ -132,13 +144,13 @@ const handleToSubmit = async(e) =>{
 
                     <div className="name flex-col">
                         <label htmlFor="">Product Title</label>
-                        <input type="text" name='name' value={productData.name} onChange={handleToChange}/>
+                        <input type="text" name='name' value={productData.name} onChange={handleToChange} />
                     </div>
 
                     <div className="decription flex-col">
                         <label htmlFor="">Description</label>
                         {/* <input type="textarea" name='description' value={productData.description} /> */}
-                        <textarea name='description' value={productData.description} onChange={handleToChange}/>
+                        <textarea name='description' value={productData.description} onChange={handleToChange} />
                     </div>
 
                     <div className="sizesContainer flex-col">
@@ -147,8 +159,8 @@ const handleToSubmit = async(e) =>{
 
 
                             {
-                                ["S", "M", "L", "XL", "XXL"].map((size) => (
-                                    <div className="size">
+                                ["S", "M", "L", "XL", "XXL"].map((size, index) => (
+                                    <div className="size" key={index}>
                                         <p
                                             className={`${sizes.includes(size) ? "selectedSize" : ""}`}
                                             onClick={() => setSizes((prev) => prev.includes(size) ? prev.filter((item) => item != size) : [...prev, size])}>
@@ -184,22 +196,22 @@ const handleToSubmit = async(e) =>{
                     <div className="prices">
                         <div className="selling flex-col">
                             <label htmlFor="">Selling Price</label>
-                            <input type="number" name='price' value={productData.price} placeholder='Rs' onChange={handleToChange}/>
+                            <input type="number" name='price' value={productData.price} placeholder='Rs' onChange={handleToChange} />
                         </div>
 
                         <div className="mrp flex-col">
                             <label htmlFor="">MRP Price</label>
-                            <input type="number" name='mrp' value={productData.mrp} placeholder='Rs' onChange={handleToChange}/>
+                            <input type="number" name='mrp' value={productData.mrp} placeholder='Rs' onChange={handleToChange} />
                         </div>
 
                         <div className="mrp flex-col">
                             <label htmlFor="">In Stock</label>
-                            <input type="number" name='inStock' value={productData.inStock} placeholder='QTY' onChange={handleToChange}/>
+                            <input type="number" name='inStock' value={productData.inStock} placeholder='QTY' onChange={handleToChange} />
                         </div>
                     </div>
 
                     <div className="bestseller">
-                        <input type="checkbox" onChange={()=>setBestSeller(!bestSeller)}/>
+                        <input type="checkbox" onChange={() => setBestSeller(!bestSeller)} />
                         BestSeller
                     </div>
 

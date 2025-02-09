@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import './registration.css';
 import axios from 'axios';
 import { ToastContainer,toast } from 'react-toastify';
 import Loader from '../../loader/Loader';
+import { Navigate } from 'react-router-dom'
+import { storeContext } from '../../context/context'
 
 function Registration() {
+  const { auth } = useContext(storeContext)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,6 +20,9 @@ function Registration() {
 
   const [loader,setLoader] = useState(false)
 
+  if (auth?.role === "Worker") {
+    return <Navigate to="/login" />
+}
   const handleChange = (e) => {
     const { name, value } = e.target;
 

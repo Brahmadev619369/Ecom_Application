@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import Loader from '../../loader/Loader'
-import { ToastContainer, toast } from 'react-toastify'
+import toast, { Toaster } from 'react-hot-toast';
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -31,10 +31,9 @@ function ForgotPassword() {
         <Loader />
       )}
 
-      <ToastContainer/>
 
       <div className="loginContainer">
-      <ToastContainer />
+      <Toaster />
 
         <h2>Forgot Password</h2>
         <hr />

@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 // const twilio = require('twilio');
 const PlaceOrders = require('../models/placeOrders');
-
+const moment = require("moment")
 
 // generate otp
 const generateOtp = () => {
@@ -66,7 +66,7 @@ const sendStatusToEmail = async (email, status, orderId) => {
             html: `
             <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; max-width: 600px; margin: auto;">
                 <h2 style="color: #333;">Order Status Update</h2>
-                <p>Dear Customer,</p>
+                <p>Hi Customer,</p>
                 <p>Your order with <strong>ID: ${orderId}</strong> is now <strong style="color: green;">${status}</strong>.</p>
                 <p>Thank you for shopping with us!</p>
                 <hr />
@@ -110,11 +110,6 @@ const sendSMS = async(phone,otp)=>{
     }
 }
 
-// fun for delivered msg
-const OrderDelivered = async (phone) => {
-
-}
-
 
 const updateOrderStatus = async (req, res, io) => {
     const { orderId, status } = req.body;
@@ -140,6 +135,7 @@ const updateOrderStatus = async (req, res, io) => {
 
         if (status != "Delivered") {
             order.orderStatus = status
+            order.updatedAt = new Date();
             await order.save()
             await sendStatusToEmail(order.address?.email,status,orderId)
             return res.status(200).send({ message: `Order status updated to ${status}`, order });

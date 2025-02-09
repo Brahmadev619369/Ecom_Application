@@ -4,7 +4,7 @@ import axios from 'axios'
 import { storeContext } from '../../context/context'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../../loader/Loader'
-
+import toast, { Toaster } from 'react-hot-toast';
 
 function Login() {
   const [email, setEmail] = useState("")
@@ -24,7 +24,7 @@ function Login() {
       navigate("/")
       setloader(false)
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.error || "Something Went Wrong!");
 
     } finally {
       setloader(false)
@@ -41,6 +41,8 @@ function Login() {
           <Loader/>
         )
       }
+
+      <Toaster/>
       <div className="adminLogin">
         <h1>YOURCART</h1>
         <h2>ADMIN PANEL</h2>

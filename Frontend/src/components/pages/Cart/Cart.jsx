@@ -164,14 +164,16 @@ if(!cartData){
 <div>
 <p><span><AiFillSafetyCertificate className='icon'/></span>Safe and Secure Payments.Easy returns.100% Authentic products.</p>
 </div>
-      </div>
 
-{      token && (
+
+      </div>
+      {      token && (
   <div className="placeOrderBtn">
         <button onClick={()=>selectAddress()}>
           Place Order
         </button>
       </div>)}
+
       </div>
     </div>
   )

@@ -37,18 +37,13 @@ useEffect(()=>{
             <div className={`sidebar`}>
 
                 <div className="menu">
-
-                {
-    isadmin && (
-        <Link className="menu-items" to={"/"}>
+                <Link className="menu-items" to={"/"}>
         <MdDashboard className="icon" />
         <span className="text">
             DASHBOARD
         </span>
 
     </Link>
-    )
-}
 {
     isadmin && (
         <Link className="menu-items" to={"/additems"}>

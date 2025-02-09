@@ -91,6 +91,6 @@
 
 
    .invoice-hide{
-    /* position: absolute;
-    left: -9999px; */
+    position: absolute;
+    left: -9999px;
    }

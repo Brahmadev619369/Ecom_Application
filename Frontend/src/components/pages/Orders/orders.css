@@ -87,6 +87,11 @@
     color: green;
 }
 
+.status span{
+    font-size: 13px;
+}
+
+
 
 @media (max-width:570px) {
     .ordersCards .ordersCard  p{
@@ -125,6 +130,11 @@
         height: 110px;
         border-radius: 5px;
     }
+
+    .status span{
+        font-size: 10px;
+    }
+    
 }
 
 @media (max-width:420px) {
@@ -164,4 +174,8 @@
         height: 105px;
         border-radius: 5px;
     }
+    .status span{
+        font-size: 9px;
+    }
+    
 }

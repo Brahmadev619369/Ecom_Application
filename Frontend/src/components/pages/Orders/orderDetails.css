@@ -181,7 +181,11 @@ font-size: 14px;
     color: green;
 }
 
-
+.disableInvoiceBtn{
+    user-select: none;
+    opacity: 0.5;
+    pointer-events: none;
+}
 
 @media (max-width:1000px) {
     .ordersDetails .itemCard .img{

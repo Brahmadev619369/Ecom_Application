@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import "./subscribe.css";
+import { Navigate } from 'react-router-dom'
+import { storeContext } from '../../context/context'
+import Loader from "../../loader/Loader";
 
 function Subscribe() {
   const [formData, setFormData] = useState({
@@ -9,9 +12,13 @@ function Subscribe() {
     festival: "",
     image: null, 
   });
-
+const { auth } = useContext(storeContext)
   const token = localStorage.getItem("AuthToken");
+    const [isloading,setIsloading] = useState(false)
 
+  if (auth?.role === "Worker") {
+    return <Navigate to="/login" />
+}
   // Handle text inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +39,7 @@ function Subscribe() {
   // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+setIsloading(true)
     try {
       const formDataObj = new FormData();
       formDataObj.append("subject", formData.subject);
@@ -60,12 +67,18 @@ function Subscribe() {
       });
     } catch (error) {
       console.error("Error submitting form:", error);
+    }finally{
+      setIsloading(false)
     }
   };
 
   return (
     <div className="subscribe-container">
-      <h2>Subscribe to Our Newsletter</h2>
+{
+  isloading && <Loader/>
+}
+
+      <h2>Newsletter for Our Subscriber</h2>
       <form onSubmit={handleSubmit} className="subscribe-form">
         <div className="input-group">
           <label>Subject</label>

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { storeContext } from '../../context/context'
 import "./ordersDetails.css"
 import { FaFileInvoice } from "react-icons/fa";
@@ -9,10 +9,12 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Invoice from '../../invoice/Invoice'
 import moment from 'moment'
+import { Navigate } from 'react-router-dom'
+
 function OrdersDetails() {
     const { orderId } = useParams()
     const [orderDetails, setOrderDetails] = useState({})
-    const { currency } = useContext(storeContext)
+    const { currency,auth } = useContext(storeContext)
     const [items, setItems] = useState([])
     const [totalAmt, setTotalAmt] = useState(0)
     const [deliveryFee, setDeliveryFee] = useState(null)
@@ -24,6 +26,12 @@ function OrdersDetails() {
     const invoiceRef = useRef(null)
     const [isgenerating,setIsgenerating] = useState(false)
     const [qrCode,setQrcode] = useState(null)
+
+
+    if (auth?.role === "Worker") {
+        return <Navigate to="/login" />
+    }
+
     const fetchOrderDetails = async () => {
         try {
             const response = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/orders/${orderId}`, {
@@ -170,8 +178,11 @@ function OrdersDetails() {
                             {status}
                         </div>
                         <div className="statusDate">
-                            On <span>{<span>{moment(orderDetails.orderDate).format("Do MMM 'YY")}</span>
-                        }</span>
+                            On {
+                            status === "Order Placed" ? (
+                                <span> {moment(orderDetails.orderDate).format("lll")}</span>
+                            ) :(<span> {moment(orderDetails.updatedAt).format("lll")}</span>)
+                        }
                         </div>
                     </div>
                 </div>

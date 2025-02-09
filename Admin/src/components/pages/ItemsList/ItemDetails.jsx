@@ -4,14 +4,19 @@ import { storeContext } from '../../context/context';
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import axios from 'axios';
 import "./itemDetails.css"
+import { Navigate } from 'react-router-dom'
+
 function ItemDetails() {
     const { productId } = useParams();
-    const { currency } = useContext(storeContext);
+    const { currency,auth } = useContext(storeContext);
     const [productData, setProductData] = useState({});
     const [image, setImage] = useState("");
     const [size, setSize] = useState("");
     const [showDescription, setShowDecription] = useState(false);
 
+    if (auth?.role === "Worker") {
+          return <Navigate to="/login" />
+      }
     const fetchProductData = async () => {
         try {
             const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/products/${productId}`);

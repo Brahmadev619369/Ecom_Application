@@ -41,17 +41,13 @@ const orderDetails = async(req,res) =>{
 //     }
 // };
 
-const allOrders = async(req,res) =>{
-    console.log("HELLO allOrders");
-    
-}
 
 
 const adminOrder = async(req,res) =>{
     console.log("HELLO ADMIN");
 
    try {
-    const orders = await PlaceOrders.find()
+    const orders = await PlaceOrders.find().sort({orderDate:-1})
     return res.status(200).json(orders)
     
    } catch (error) {
@@ -63,7 +59,6 @@ const adminOrder = async(req,res) =>{
 
 module.exports = {
     myOrders,
-    allOrders,
     orderDetails,
     adminOrder
 }

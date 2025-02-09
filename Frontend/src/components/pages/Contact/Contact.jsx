@@ -1,25 +1,29 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import "./contact.css"
+import LoaderNew from '../../loader2/LoaderNew'
 
 function Contact() {
   const { register, handleSubmit } = useForm()
 const token = localStorage.getItem("AuthToken")
+  const [isloading,setIsloading] = useState(false)
 
   const handleToSubmit = async(data) =>{
+    setIsloading(true)
     try {
       const res = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/contactUs`,data,{
         headers:{
           Authorization : `Bearer ${token}`
         }
       })
-
-      console.log(res);
       
     } catch (error) {
       console.log(error);
       
+    }
+    finally{
+      setIsloading(false)
     }
   } 
 
@@ -31,7 +35,9 @@ const token = localStorage.getItem("AuthToken")
         <h2 className='playfair-display-font'>Contact Us</h2>
         <div className="line1"></div>
       </div>
-
+{
+  isloading && <LoaderNew/>
+}
       <div className="contactFormContainer">
         <form className='formContainer' onSubmit={handleSubmit(handleToSubmit)}>
 

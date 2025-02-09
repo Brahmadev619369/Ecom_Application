@@ -39,6 +39,12 @@ const orderPlaceScheme = new mongoose.Schema({
     },
     qrcode:{
         type:String
+    },
+    transactionId :{
+        type:String
+    },
+    invoiceNumber:{
+        type:String
     }
 },{timestamps:true})
 

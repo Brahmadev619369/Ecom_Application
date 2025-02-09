@@ -22,7 +22,7 @@ const contactUsSchema = mongoose.Schema({
         type:String,
         require:true
     }
-})
+},{timestamps:true})
 
 const Contact = mongoose.model("Contact",contactUsSchema)
 module.exports = Contact;

@@ -24,45 +24,46 @@ const StoreContextProvider = ({ children }) => {
     const [search,setSearch] = useState("")
     const [showSearchBtn,setShowSearchBtn] = useState(false)
     const [products,setProducts] = useState([])
+    const [productsLoader,setProductsLoader] = useState(false)
+    const [wishlistLoader,setWishlistLoader] = useState(false)
+    // const invoiceRef = useRef(null);
 
-    const invoiceRef = useRef(null);
-
-    const generatePDF = () => {
-        const input = invoiceRef.current;
-    log
-        html2canvas(input)
-          .then((canvas) => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait orientation, A4 size
-            const width = pdf.internal.pageSize.getWidth();
-            const height = pdf.internal.pageSize.getHeight();
+    // const generatePDF = () => {
+    //     const input = invoiceRef.current;
+    //     html2canvas(input)
+    //       .then((canvas) => {
+    //         const imgData = canvas.toDataURL('image/png');
+    //         const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait orientation, A4 size
+    //         const width = pdf.internal.pageSize.getWidth();
+    //         const height = pdf.internal.pageSize.getHeight();
     
-            // Calculate scaling to fit the canvas within the PDF page
-            const canvasAspectRatio = canvas.width / canvas.height;
-            const pdfAspectRatio = width / height;
+    //         // Calculate scaling to fit the canvas within the PDF page
+    //         const canvasAspectRatio = canvas.width / canvas.height;
+    //         const pdfAspectRatio = width / height;
     
-            let scale = 1;
-            if (canvasAspectRatio > pdfAspectRatio) {
-              scale = width / canvas.width;
-            } else {
-              scale = height / canvas.height;
-            }
-            const scaledWidth = canvas.width * scale;
-            const scaledHeight = canvas.height * scale;
-            const xPos = (width - scaledWidth) / 2;
-            const yPos = (height - scaledHeight) / 2;
+    //         let scale = 1;
+    //         if (canvasAspectRatio > pdfAspectRatio) {
+    //           scale = width / canvas.width;
+    //         } else {
+    //           scale = height / canvas.height;
+    //         }
+    //         const scaledWidth = canvas.width * scale;
+    //         const scaledHeight = canvas.height * scale;
+    //         const xPos = (width - scaledWidth) / 2;
+    //         const yPos = (height - scaledHeight) / 2;
     
-            pdf.addImage(imgData, 'PNG', xPos, yPos, scaledWidth, scaledHeight);
-            pdf.save('invoice.pdf');
-          })
-          .catch((error) => {
-            console.error('Error generating PDF:', error);
-          });
-      };
+    //         pdf.addImage(imgData, 'PNG', xPos, yPos, scaledWidth, scaledHeight);
+    //         pdf.save('invoice.pdf');
+    //       })
+    //       .catch((error) => {
+    //         console.error('Error generating PDF:', error);
+    //       });
+    //   };
 
 
     // logic to fetch products 
       const fetchProducts = async() =>{
+        setProductsLoader(true)
         try {
             const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/products/get-products`)
             console.log("data",res.data);
@@ -70,6 +71,8 @@ const StoreContextProvider = ({ children }) => {
         } catch (error) {
             console.log(error)
             // toast.error("Error to fetching products.")
+        }finally{
+            setProductsLoader(false)
         }
       }
 
@@ -110,6 +113,10 @@ const StoreContextProvider = ({ children }) => {
         // Post cart item to database
         try {
             const token = localStorage.getItem("AuthToken");
+            if (!token) {
+                toast.error("You need to log in first for save cart products!");
+                return;
+            }
             const res = await axios.post(
                 `${import.meta.env.VITE_EXPRESS_BASE_URL}/cart/add-to-cart`,
                 {
@@ -206,9 +213,9 @@ const StoreContextProvider = ({ children }) => {
                     Authorization: `Bearer ${token}`
                 }
             })
-            console.log(res.data[0].items);
+            console.log(res.data?.[0].items);
 
-            setCartItems(res.data[0].items)
+            setCartItems(res.data?.[0].items)
         }
 
         getCartItems()
@@ -476,6 +483,7 @@ const StoreContextProvider = ({ children }) => {
     }
 
     const getWishlist = async(token) =>{
+        setWishlistLoader(true)
         try {
             const wishlist = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/wishlist/get-wishlist`,{
                 headers:{
@@ -490,17 +498,18 @@ const StoreContextProvider = ({ children }) => {
             
             toast.error(error.response.data.error || error.response.data.message);
             
+        }finally{
+            setWishlistLoader(false)
         }
     }
-    getWishlist(token)
 
     const currency = "₹"
-    const contextValue = {currency, products, addToCart, 
+    const contextValue = {currency, products, addToCart, wishlistLoader,
         removeToCart, cartCounts, cartItems, loginHandler, 
         cartTotalAmt, totalMrp, deliveryAmt, percentagedis, 
         totalAmount, deleteCartItems,logout,auth,logoutMSg,
         searchBtn ,showSearchBtn,setShowSearchBtn,setSearch,
-        search,invoiceRef,generatePDF ,addToWishlist,getWishlist,removeToWishlist}
+        search,addToWishlist,getWishlist,removeToWishlist,productsLoader,productsLoader}
 
     return (
         <StoreContext.Provider value={contextValue}>

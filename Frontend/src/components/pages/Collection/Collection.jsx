@@ -5,9 +5,10 @@ import { StoreContext } from "../../Context";
 import Product from '../../../components/product/Product'
 import { RxCross2 } from "react-icons/rx";
 import SearchBar from '../../searchBar/SearchBar'
+import LoaderNew from "../../loader2/LoaderNew";
 
 function Collection() {
-  const { products,search,showSearchBtn} = useContext(StoreContext)
+  const { products,search,showSearchBtn,productsLoader} = useContext(StoreContext)
   const [showFilters, setShowFilters] = useState(false);
   const [product, setProduct] = useState([])
   const [filterProduct,setFilterProduct]  = useState([])
@@ -94,6 +95,9 @@ useEffect(()=>{
 
   return (
     <div className="collectionContainer">
+      {
+        productsLoader && <LoaderNew/>
+      }
           {showSearchBtn && 
       <SearchBar/>
     }
