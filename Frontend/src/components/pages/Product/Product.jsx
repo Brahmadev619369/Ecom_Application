@@ -47,26 +47,26 @@ function Product() {
   // console.log(productData);
 
   // fetch data from db
-  const fetchData = async() =>{
+  const fetchData = async () => {
     setIsloading(true)
     try {
       const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/products/${productId}`)
       console.log(res.data);
       setProductData(res.data)
       setImage(res.data?.image[0])
-      
+
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.error || "Something went wrong!")
-      
-    }finally{
+
+    } finally {
       setIsloading(false)
     }
   }
-  
-useEffect(()=>{
-  fetchData()
-},[productId])
+
+  useEffect(() => {
+    fetchData()
+  }, [productId])
 
   const discountPercentage = (mrp, price) => {
     return Math.round(((mrp - price) / mrp) * 100, 2)
@@ -90,7 +90,7 @@ useEffect(()=>{
   }, [token, productId])
 
   console.log(iswishlisted);
-  
+
 
   const handleToAddAndRemoveWishlist = async () => {
     if (!token) {
@@ -113,7 +113,7 @@ useEffect(()=>{
   return (
     <div className="ProductDetailsMainContainer">
       {
-        isloading && <LoaderNew/>
+        isloading && <LoaderNew />
       }
       <Toaster />
       <div className="ProductDetailsContainer">
@@ -140,10 +140,10 @@ useEffect(()=>{
               </div>
             }
 
-<button className="wishlistBtn" onClick={() => handleToAddAndRemoveWishlist()}> <FaHeart className={`heart ${iswishlisted ? "redHeart" : ""}`} /></button>
+            <button className="wishlistBtn" onClick={() => handleToAddAndRemoveWishlist()}> <FaHeart className={`heart ${iswishlisted ? "redHeart" : ""}`} /></button>
           </div>
 
-          
+
 
         </div>
 
@@ -199,7 +199,7 @@ useEffect(()=>{
 
           <div className="someDetails">
             <p>100% Original Product.</p>
-            <p>Cash on delivery is available on this product.</p>
+            <p>COD is not available. Only online payment is accepted.</p>
             <p>Easy return and exchange policy within 7 days.</p>
           </div>
 

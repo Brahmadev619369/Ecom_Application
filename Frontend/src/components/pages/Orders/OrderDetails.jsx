@@ -27,6 +27,7 @@ function OrderDetails() {
     const [isloading, setIsloading] = useState(false)
 
     const fetchOrderDetails = async () => {
+        setIsloading(true)
         try {
             const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/orders/${orderId}`, {
                 headers: {
@@ -41,6 +42,8 @@ function OrderDetails() {
         } catch (error) {
             console.log(error);
 
+        } finally {
+            setIsloading(false)
         }
     }
 

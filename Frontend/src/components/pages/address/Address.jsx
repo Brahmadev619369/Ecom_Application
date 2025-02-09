@@ -7,13 +7,15 @@ import PhoneInput from 'react-phone-number-input'
 import { StoreContext } from '../../Context'
 import { toast, ToastContainer } from 'react-toastify'
 import { ImBin } from "react-icons/im";
+import LoaderNew from '../../loader2/LoaderNew'
 
 function Address() {
-const {cartItems} = useContext(StoreContext)
+  const { cartItems } = useContext(StoreContext)
   const token = localStorage.getItem("AuthToken");
   const [saveAddress, setSaveAddress] = useState([])
   const [selectAddress, setSelectAddress] = useState(null)
   const [phoneNum, setPhoneNum] = useState("")
+  const [isloading, setIsloading] = useState("")
   const [newAddress, setNewAddress] = useState({
     name: "",
     surname: "",
@@ -25,36 +27,39 @@ const {cartItems} = useContext(StoreContext)
     pinCode: ""
   })
 
-useEffect(() => {
-  setNewAddress((prevAdd)=>({
-    ...prevAdd,
-    mobile:phoneNum
-  }))
-}, [phoneNum])
+  useEffect(() => {
+    setNewAddress((prevAdd) => ({
+      ...prevAdd,
+      mobile: phoneNum
+    }))
+  }, [phoneNum])
 
   const navigate = useNavigate()
 
-// fetch address 
+  // fetch address 
 
-const fetchAddress = async() =>{
-  try {
-    const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/address/getAddress`, {
-      headers: {
+  const fetchAddress = async () => {
+    setIsloading(true)
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/address/getAddress`, {
+        headers: {
           Authorization: `Bearer ${token}`
-      }
-  })
+        }
+      })
 
-  setSaveAddress(res.data);
-  
-  } catch (error) {
-    console.log(error);
-    
+      setSaveAddress(res.data);
+
+    } catch (error) {
+      console.log(error);
+
+    } finally {
+      setIsloading(false)
+    }
   }
-}
 
-useEffect(()=>{
-  fetchAddress()
-},[])
+  useEffect(() => {
+    fetchAddress()
+  }, [])
 
 
 
@@ -67,7 +72,7 @@ useEffect(()=>{
 
 
   // handle to select existing address
-  const handleToSelectAddress = (adres) =>{
+  const handleToSelectAddress = (adres) => {
     setSelectAddress(adres)
     setNewAddress({
       name: "",
@@ -78,24 +83,25 @@ useEffect(()=>{
       state: "",
       city: "",
       pinCode: ""
-  })
+    })
   }
 
   // form submit 
-  const handleToSubmit = async(e) =>{
+  const handleToSubmit = async (e) => {
+    setIsloading(true)
     e.preventDefault()
-    if(!selectAddress){
+    if (!selectAddress) {
       try {
-        const res = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/address/addAddress`,newAddress,{
-          headers:{
-            Authorization:`Bearer ${token}`
+        const res = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/address/addAddress`, newAddress, {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
         })
         fetchAddress()
-       toast(res.data.message);
+        toast(res.data.message);
       } catch (error) {
         console.log(error);
-      }finally{
+      } finally {
         setNewAddress({
           name: "",
           surname: "",
@@ -105,7 +111,9 @@ useEffect(()=>{
           state: "",
           city: "",
           pinCode: ""
-      })
+        })
+
+        setIsloading(false)
       }
     }
 
@@ -116,44 +124,48 @@ useEffect(()=>{
       !addressToUse.mobile) {
       alert("Please complete the delivery info");
       return;
-  }
+    }
 
-  localStorage.setItem("useAddress",
-    JSON.stringify(addressToUse))
+    localStorage.setItem("useAddress",
+      JSON.stringify(addressToUse))
 
-    if(Object.keys(cartItems).length === 0){
+    if (Object.keys(cartItems).length === 0) {
       return;
     }
 
     navigate("/place-orders")
   }
 
-console.log(cartItems);
+  console.log(cartItems);
 
-// delete add
-const handleToDeleteAddress = async(addressId) =>{
-  try {
-      const res = await axios.delete(`${import.meta.env.VITE_EXPRESS_BASE_URL}/address/${addressId}`,{
-        headers:{
-          Authorization : `Bearer ${token}`
+  // delete add
+  const handleToDeleteAddress = async (addressId) => {
+    try {
+      const res = await axios.delete(`${import.meta.env.VITE_EXPRESS_BASE_URL}/address/${addressId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
       })
-      if(res.status === 200){
+      if (res.status === 200) {
         toast.success(res.data.msg)
       }
       fetchAddress()
-  } catch (error) {
-    // toast.error(error.respose.data.error)
-    console.log(error);
-    
+    } catch (error) {
+      // toast.error(error.respose.data.error)
+      console.log(error);
+
+    }
   }
-}
 
   return (
     <div className="addressMainContainer">
       <h2>Delivery Information</h2>
       <hr />
-    <ToastContainer/>
+      {
+        isloading && <LoaderNew />
+      }
+
+      <ToastContainer />
       <div className={`addressContainer`}>
         {saveAddress.length > 0 && (
           <div className="rightContainer">
@@ -182,11 +194,11 @@ const handleToDeleteAddress = async(addressId) =>{
 
                   </label>
                   <div className="addressDel">
-                  <ImBin onClick={(e)=>{
-                    e.stopPropagation();
-                    handleToDeleteAddress(addrs._id)
-                  }} className='del-btn'/>
-                    </div>
+                    <ImBin onClick={(e) => {
+                      e.stopPropagation();
+                      handleToDeleteAddress(addrs._id)
+                    }} className='del-btn' />
+                  </div>
                 </div>
               );
             })}
