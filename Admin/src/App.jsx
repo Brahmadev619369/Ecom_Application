@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { createBrowserRouter, createRoutesFromChildren, Route, RouterProvider } from 'react-router-dom'
 import Layout from './components/Layout'
