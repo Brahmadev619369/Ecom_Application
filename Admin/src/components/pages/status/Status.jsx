@@ -174,7 +174,7 @@ function Status() {
                 <div className="order-update">
                     <h3>Update Order Status</h3>
                     <div className="selectStatus">
-                        <select onChange={(e) => setStatus(e.target.value)}  value={status}>
+                        <select onChange={(e) => setStatus(e.target.value)} disabled={orderDetails?.status==="Delivered"} value={status}>
                             <option value="Order Placed">Order Placed</option>
                             <option value="Order Confirmed">Order Confirmed</option>
                             <option value="Shipped">Shipped</option>
