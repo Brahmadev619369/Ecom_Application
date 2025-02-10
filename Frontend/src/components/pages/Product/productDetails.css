@@ -10,6 +10,7 @@
 .productImgs{
     display: flex;
     flex-direction: row;
+    gap: 10px;
    
 }
 .ProductDetailsContainer {
@@ -43,8 +44,8 @@
 .outOfStockOverlay{
     position: absolute;
     z-index: 10;
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
     backdrop-filter: blur(1px);
     top: 0;
     left: 0;
@@ -66,8 +67,8 @@
 }
 
 .mainImage img {
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
     object-fit: contain;
 }
 

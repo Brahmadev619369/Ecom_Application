@@ -129,7 +129,7 @@ const updateOrderStatus = async (req, res, io) => {
             const OTP = generateOtp()
             order.otp = OTP
             await sendOtpToEmail(order.address?.email, OTP)
-            await sendSMS(order.address?.mobile, OTP)
+            // await sendSMS(order.address?.mobile, OTP)
             await order.save()
         }
 
@@ -152,35 +152,78 @@ const updateOrderStatus = async (req, res, io) => {
 
 
 // verify order status 
-const verifyStatus = async(req,res) =>{
-    const {orderId,otp} = req.body;
+// const verifyStatus = async(req,res) =>{
+//     const {orderId,otp} = req.body;
+//     if(!otp){
+//         return res.status(400).send({error:"Otp Required"})
+//     }
+
+//     try {
+//         const order = await PlaceOrders.findOne({orderId:orderId})
+//     if(!order){
+//         return res.status(400).send({error:"Order not found."})
+//     }
+
+//     if (order.otp === otp) {
+//         order.orderStatus = "Delivered"
+//         order.otp = null;
+//         await order.save()
+
+//         // Notify clients that the order is delivered
+//         io.emit('orderStatusUpdate', { orderId, status: 'Delivered' });
+//         await sendStatusToEmail(order.address?.email, "Delivered",orderId)
+//         return res.json({ message: 'Order delivered successfully' });
+        
+//     } else {
+//         res.status(400).send({ error: 'Invalid OTP' })
+//     }
+
+//     } catch (error) {
+//         return res.status(500).send({
+//             error:error
+//         })
+//     }
+// }
+
+const verifyStatus = async (req, res) => {
+    const { orderId, otp } = req.body;
+
+    if (!orderId) {
+        return res.status(400).json({ error: "Order ID is required" });
+    }
+
+    if (!otp) {
+        return res.status(400).json({ error: "OTP is required" });
+    }
 
     try {
-        const order = await PlaceOrders.findOne({orderId:orderId})
-    if(!order){
-        return res.status(400).send({error:"Order not found."})
-    }
+        const order = await PlaceOrders.findOne({ orderId });
 
-    if (order.otp === otp) {
-        order.orderStatus = "Delivered"
+        if (!order) {
+            return res.status(404).json({ error: "Order not found." });
+        }
+
+        if (order.otp !== otp) {
+            return res.status(400).json({ error: "Invalid OTP" });
+        }
+
+        // Update order status and clear OTP
+        order.orderStatus = "Delivered";
         order.otp = null;
-        await order.save()
+        await order.save();
 
         // Notify clients that the order is delivered
-        io.emit('orderStatusUpdate', { orderId, status: 'Delivered' });
-        await sendStatusToEmail(order.address.email, "Delivered",orderId)
-        return res.json({ message: 'Order delivered successfully' });
-        
-    } else {
-        res.status(400).json({ message: 'Invalid OTP' });
-    }
+        // io.emit("orderStatusUpdate", { orderId, status: "Delivered" });
 
+        // Send email notification
+        await sendStatusToEmail(order.address?.email, "Delivered", orderId);
+
+        return res.json({ message: "Order delivered successfully" });
     } catch (error) {
-        return res.status(500).send({
-            error:error
-        })
+        return res.status(500).json({ error: error.message });
     }
-}
+};
+
 
 module.exports = {
     updateOrderStatus,

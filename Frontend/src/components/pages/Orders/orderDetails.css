@@ -25,8 +25,8 @@
 }
 
 .ordersDetails .itemCard{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+grid-template-columns: 1fr 2fr;
     gap: 20px;
     background-color: aliceblue;
     padding: 5px;
@@ -34,12 +34,20 @@
 }
 
 .ordersDetails .itemCard .img{
-    height: 150px;
+    max-height: 150px;
+    overflow: hidden;
+    max-width: 120px;
 }
 
 .ordersDetails .itemCard .img img{
-    height: 150px;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 5px;
+
 }
+
+
 
 .itemCard .nameAndOthers .name{
     font-weight: 600;
@@ -188,17 +196,10 @@ font-size: 14px;
 }
 
 @media (max-width:1000px) {
-    .ordersDetails .itemCard .img{
-        height: 130px;
-    }
-    
-    .ordersDetails .itemCard .img img{
-        height: 130px;
-    }
-    
+
     .itemCard .nameAndOthers .name{
         font-weight: 600;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         font-size: 15px;
     }
 
@@ -212,13 +213,6 @@ font-size: 14px;
         width: 70vw;
     }
 
-    .ordersDetails .itemCard .img{
-        height: 130px;
-    }
-    
-    .ordersDetails .itemCard .img img{
-        height: 130px;
-    }
     
     .itemCard .nameAndOthers .name p{
         font-weight: 600;
@@ -243,11 +237,9 @@ font-size: 14px;
     }
 
     .ordersDetails .itemCard .img{
-        height: 110px;
-    }
-    
-    .ordersDetails .itemCard .img img{
-        height: 110px;
+        max-height: 120px;
+        overflow: hidden;
+        max-width: 90px;
     }
     
     .itemCard .nameAndOthers .name p{
@@ -272,6 +264,9 @@ font-size: 14px;
     .right-Container{
         flex-direction: column-reverse;
     }
+    .left-Container .otherDetails .deliveryStatus {
+        font-weight: 600;
+    }
 }
 
 
@@ -281,12 +276,10 @@ font-size: 14px;
     }
 
     .ordersDetails .itemCard .img{
-        height: 100px;
-    }
-    
-    .ordersDetails .itemCard .img img{
-        height: 100px;
-    }
+        max-height: 110px;
+        overflow: hidden;
+        max-width: 85px;
+}
     
     .itemCard .nameAndOthers .name p{
         font-weight: 600;
@@ -319,11 +312,9 @@ font-size: 14px;
     }
 
     .ordersDetails .itemCard .img{
-        height: 80px;
-    }
-    
-    .ordersDetails .itemCard .img img{
-        height: 80px;
+        max-height: 100px;
+        overflow: hidden;
+        max-width: 80px;
     }
     
     .itemCard .nameAndOthers .name p{

@@ -59,7 +59,9 @@ function Orders() {
               return (
                 <div className="ordersCard" key={index} onClick={()=>orderDetails(item.orderId)}>
                   <div className="img">
-                    <img src={item.items[0]?.image[0]} alt="" />
+                   <div className="imgCon">
+                   <img src={item.items[0]?.image[0]} alt="" />
+                   </div>
                     {
                       item.items.length > 1 && (
                         <div className="overlayImg ">
