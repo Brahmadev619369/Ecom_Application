@@ -13,6 +13,11 @@ function Orders() {
   const { currency } = useContext(StoreContext)
   const [isloading , setIsloading] = useState(false)
 
+    useEffect(() => {
+      window.scrollTo({top:0,behavior:"smooth"});
+  }, []);
+  
+
   const fetchMyorders = async () => {
     setIsloading(true)
 

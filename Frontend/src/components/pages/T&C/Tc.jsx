@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./tc.css"
 function Tc() {
+
+    useEffect(() => {
+        window.scrollTo({top:0,behavior:"smooth"});
+    }, []);
+
+    
     return (
         <div className="terms-container">
             <p className='margin underline'><strong>Terms and Conditions</strong></p>

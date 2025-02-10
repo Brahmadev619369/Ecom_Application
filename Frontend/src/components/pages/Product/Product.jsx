@@ -27,24 +27,11 @@ function Product() {
   const [isloading, setIsloading] = useState(false)
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [productId]);
-
-  // const fetchProductData = async () => {
-  //   products.map((item) => {
-  //     if (item._id === productId) {
-  //       setProductData(item)
-  //       setImage(item.image[0])
-  //     }
-  //   })
-  // }
+    window.scrollTo({top:0,behavior:"smooth"});
+}, [productId]);
 
 
-  // useEffect(() => {
-  //   fetchProductData()
-  // }, [])
 
-  // console.log(productData);
 
   // fetch data from db
   const fetchData = async () => {

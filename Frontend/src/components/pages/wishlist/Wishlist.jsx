@@ -11,7 +11,10 @@ function Wishlist() {
     const [wishlist, setWishlist] = useState([])
     const [showDetails, setShowDetails] = useState(false);
     const navigate = useNavigate()
-
+    useEffect(() => {
+        window.scrollTo({top:0,behavior:"smooth"});
+    }, []);
+    
     const handleOverlay = (e) => {
         e.stopPropagation();
         setShowDetails(!showDetails)

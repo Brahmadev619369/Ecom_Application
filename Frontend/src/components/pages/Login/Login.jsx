@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState,useEffect } from 'react'
 import Loader from '../../loader/Loader'
 import "./login.css"
 import { ToastContainer, toast } from 'react-toastify'
@@ -9,6 +9,11 @@ import { StoreContext } from '../../Context'
 
 
 function Login() {
+  useEffect(() => {
+    window.scrollTo({top:0,behavior:"smooth"});
+}, []);
+
+
   const { register, handleSubmit, watch, formState: { errors },reset } = useForm()
   const [currState, setCurrState] = useState("Login")
   const [isLoading, setIsLoading] = useState(false)

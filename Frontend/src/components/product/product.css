@@ -15,7 +15,7 @@
     z-index: 10;
     height: 200px;
     width: 180px;
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(0.6px);
     top: 0;
     left: 0;
 }

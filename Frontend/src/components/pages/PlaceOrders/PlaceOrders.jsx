@@ -6,6 +6,10 @@ import "./placeOrders.css"
 import axios from 'axios';
 
 function PlaceOrders() {
+    useEffect(() => {
+      window.scrollTo({top:0,behavior:"smooth"});
+  }, []);
+  
     const { products,
       cartCounts, 
       cartItems,
@@ -75,9 +79,9 @@ useEffect(() => {
     setPlaceItems(updatedPlaceData)
   }
 }, [cartData, products])
-console.log("ccc",placeItems);
 
-console.log("placeItems",placeItems);
+
+// console.log("placeItems",placeItems);
 
 // cartItems count 
 const cartCountWithWord = ()=>{

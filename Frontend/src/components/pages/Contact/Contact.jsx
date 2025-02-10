@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import "./contact.css"
 import LoaderNew from '../../loader2/LoaderNew'
@@ -8,6 +8,11 @@ function Contact() {
   const { register, handleSubmit } = useForm()
 const token = localStorage.getItem("AuthToken")
   const [isloading,setIsloading] = useState(false)
+
+  useEffect(() => {
+    window.scrollTo({top:0,behavior:"smooth"});
+}, []);
+
 
   const handleToSubmit = async(data) =>{
     setIsloading(true)

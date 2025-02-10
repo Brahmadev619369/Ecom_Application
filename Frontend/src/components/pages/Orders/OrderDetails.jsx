@@ -25,6 +25,10 @@ function OrderDetails() {
     const [status, setStatus] = useState("")
     const [isgenerating, setIsgenerating] = useState(false)
     const [isloading, setIsloading] = useState(false)
+  useEffect(() => {
+    window.scrollTo({top:0,behavior:"smooth"});
+}, []);
+
 
     const fetchOrderDetails = async () => {
         setIsloading(true)

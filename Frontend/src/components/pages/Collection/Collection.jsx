@@ -23,6 +23,10 @@ function Collection() {
     setProduct(products)
   }, [])
 
+  useEffect(() => {
+    window.scrollTo({top:0,behavior:"smooth"});
+}, []);
+
   // Adjust filter visibility based on screen size
   useEffect(() => {
     const handleResize = () => {

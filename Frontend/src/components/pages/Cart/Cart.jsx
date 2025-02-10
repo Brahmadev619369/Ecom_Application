@@ -23,10 +23,20 @@ function Cart() {
 
   const [cartData, setCartData] = useState([])
   const navigate = useNavigate(); 
+
+    useEffect(() => {
+      window.scrollTo({top:0,behavior:"smooth"});
+  }, []);
+  
+
 const token = localStorage.getItem("AuthToken")
-if(Object.keys(cartItems).length === 0){
-  navigate("/")
-}
+
+useEffect(()=>{
+  if(Object.keys(cartItems).length === 0){
+    navigate("/")
+  }
+},[])
+
   useEffect(() => {
     const itemsList = [];
 

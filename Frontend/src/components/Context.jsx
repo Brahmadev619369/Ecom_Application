@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect,useRef } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 // import { products } from "../assets/assets";
 // import { toast } from 'react-toastify';
 import { jwtDecode } from "jwt-decode";
@@ -19,141 +19,100 @@ const StoreContextProvider = ({ children }) => {
     const [totalMrp, setTotalMrp] = useState(0)
     const [deliveryAmt, setDeliveryAmt] = useState(0)
     const [totalAmount, setTotalAmount] = useState(0)
-    const [auth,setAuth] = useState(null)
-    const [logoutMSg,setLogoutMsg] = useState("")
-    const [search,setSearch] = useState("")
-    const [showSearchBtn,setShowSearchBtn] = useState(false)
-    const [products,setProducts] = useState([])
-    const [productsLoader,setProductsLoader] = useState(false)
-    const [wishlistLoader,setWishlistLoader] = useState(false)
-    // const invoiceRef = useRef(null);
-
-    // const generatePDF = () => {
-    //     const input = invoiceRef.current;
-    //     html2canvas(input)
-    //       .then((canvas) => {
-    //         const imgData = canvas.toDataURL('image/png');
-    //         const pdf = new jsPDF('p', 'mm', 'a4'); // Portrait orientation, A4 size
-    //         const width = pdf.internal.pageSize.getWidth();
-    //         const height = pdf.internal.pageSize.getHeight();
-    
-    //         // Calculate scaling to fit the canvas within the PDF page
-    //         const canvasAspectRatio = canvas.width / canvas.height;
-    //         const pdfAspectRatio = width / height;
-    
-    //         let scale = 1;
-    //         if (canvasAspectRatio > pdfAspectRatio) {
-    //           scale = width / canvas.width;
-    //         } else {
-    //           scale = height / canvas.height;
-    //         }
-    //         const scaledWidth = canvas.width * scale;
-    //         const scaledHeight = canvas.height * scale;
-    //         const xPos = (width - scaledWidth) / 2;
-    //         const yPos = (height - scaledHeight) / 2;
-    
-    //         pdf.addImage(imgData, 'PNG', xPos, yPos, scaledWidth, scaledHeight);
-    //         pdf.save('invoice.pdf');
-    //       })
-    //       .catch((error) => {
-    //         console.error('Error generating PDF:', error);
-    //       });
-    //   };
-
+    const [auth, setAuth] = useState(null)
+    const [logoutMSg, setLogoutMsg] = useState("")
+    const [search, setSearch] = useState("")
+    const [showSearchBtn, setShowSearchBtn] = useState(false)
+    const [products, setProducts] = useState([])
+    const [productsLoader, setProductsLoader] = useState(false)
+    const [wishlistLoader, setWishlistLoader] = useState(false)
 
     // logic to fetch products 
-      const fetchProducts = async() =>{
+    const fetchProducts = async () => {
         setProductsLoader(true)
         try {
             const res = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/products/get-products`)
-            console.log("data",res.data);
+            console.log("data", res.data);
             setProducts(res.data)
         } catch (error) {
             console.log(error)
             // toast.error("Error to fetching products.")
-        }finally{
+        } finally {
             setProductsLoader(false)
         }
-      }
+    }
 
-      useEffect(()=>{
+    useEffect(() => {
         fetchProducts()
-      },[])
-
-
-      
+    }, [])
 
 
 
 
 
-    // add to cart logic
+
+
+
     const addToCart = async (productId, size) => {
+        const token = localStorage.getItem("AuthToken");
+
         if (!size) {
             toast.dismiss();
-            toast.error("Plz select a size");
-            return;  
+            toast.error("Please select a size");
+            return;
         }
-    
-        setCartItems((prev) => {
-            const cartData = structuredClone(prev);
-            if (cartData[productId]) {
-                if (cartData[productId][size]) {
-                    cartData[productId][size] += 1;
-                } else {
-                    cartData[productId][size] = 1;
-                }
-            } else {
-                cartData[productId] = {};
-                cartData[productId][size] = 1;
-            }
-            return cartData;
-        });
-    
-        // Post cart item to database
-        try {
-            const token = localStorage.getItem("AuthToken");
-            if (!token) {
-                toast.error("You need to log in first for save cart products!");
-                return;
-            }
-            const res = await axios.post(
-                `${import.meta.env.VITE_EXPRESS_BASE_URL}/cart/add-to-cart`,
-                {
-                    productId,
-                    size,
-                    quantity: 1
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                }
-            );
 
-            toast.success("Added to cart! 🎉", {
-                style: {
-                  border: '1px solid #713200',
-                  padding: '16px',
-                  color: '#713200',
-                },
-                iconTheme: {
-                  primary: '#713200',
-                  secondary: '#FFFAEE',
-                },
-              });
-            // toast.dismiss();
-            // toast.success("Added to cart! 🎉",{toastId:productId});
-        } catch (error) {
-            console.error("Error adding to cart:", error.response?.data?.message);
-            toast.error("Error adding item to cart");
-        }finally{
-            setTimeout(() => {
-                toast.dismiss();
-            }, 2000);
+        // if (!token) {
+        //     toast.error("You need to log in first to save cart products!");
+        // }
+
+        if (token) {
+            try {
+                const res = await axios.post(
+                    `${import.meta.env.VITE_EXPRESS_BASE_URL}/cart/add-to-cart`,
+                    {
+                        productId,
+                        size,
+                        quantity: 1
+                    },
+                    {
+                        headers: { Authorization: `Bearer ${token}` }
+                    }
+                );
+
+                setCartItems(res.data.cart);
+
+                toast.success("Added to cart! 🎉", {
+                    style: {
+                        border: "1px solid #713200",
+                        padding: "16px",
+                        color: "#713200"
+                    },
+                    iconTheme: {
+                        primary: "#713200",
+                        secondary: "#FFFAEE"
+                    }
+                });
+
+            } catch (error) {
+                toast.error(error.response?.data?.message || "Error adding item to cart");
+            }
+        } else {
+            // Handle Local Storage Cart
+            let localCart = JSON.parse(localStorage.getItem("cart")) || {};
+
+            if (!localCart[productId]) {
+                localCart[productId] = {};
+            }
+
+            localCart[productId][size] = (localCart[productId][size] || 0) + 1;
+
+            localStorage.setItem("cart", JSON.stringify(localCart));
+            setCartItems(localCart);
+
+            toast.success("Added to cart! 🎉");
         }
     };
-    
 
 
     // removeToCart
@@ -311,8 +270,8 @@ const StoreContextProvider = ({ children }) => {
 
             cartData.map((item, index) => {
                 const productsData = products.find((product) => product._id === item._id)
-                console.log("MRP",productsData);
-                
+                console.log("MRP", productsData);
+
                 const totalAmt = productsData?.Mrp * item?.quantity
 
                 mrpAmt += totalAmt
@@ -344,32 +303,32 @@ const StoreContextProvider = ({ children }) => {
 
 
     // set Auth
-    useEffect(()=>{
+    useEffect(() => {
         const token = localStorage.getItem("AuthToken")
-        if(token){
+        if (token) {
             const decodedToken = jwtDecode(token)
 
-            console.log("decodedToken",decodedToken);
-            
+            console.log("decodedToken", decodedToken);
+
             setAuth({
-                id:decodedToken._id,
-                name : decodedToken.name,
-                profileUrl : decodedToken.profileURL
+                id: decodedToken._id,
+                name: decodedToken.name,
+                profileUrl: decodedToken.profileURL
             })
         }
-    },[])
+    }, [])
 
-    
+
 
     // logout logic
-    const logout = () =>{
+    const logout = () => {
         setAuth(null)
         localStorage.removeItem("AuthToken")
         setLogoutMsg("You have been logged out.")
         setTimeout(() => {
             setLogoutMsg('');
         }, 2000);
-    }   
+    }
 
     // delivery fee
     useEffect(() => {
@@ -442,33 +401,33 @@ const StoreContextProvider = ({ children }) => {
         }
     }
 
-    const searchBtn = () =>{
+    const searchBtn = () => {
         setShowSearchBtn(!showSearchBtn)
     }
 
 
     const token = localStorage.getItem("AuthToken")
-    const addToWishlist = async(productId,token) =>{
+    const addToWishlist = async (productId, token) => {
         try {
-            const wishlist = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/wishlist/add-wishlist`,{productId},{
-                headers:{
+            const wishlist = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/wishlist/add-wishlist`, { productId }, {
+                headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
             // console.log(wishlist.data);
-            
+
             return wishlist.data
         } catch (error) {
             toast.error(error.response.data.error || error.response.data.message);
             console.log(error);
-            
+
         }
     }
 
-    const removeToWishlist = async(productId,token) =>{
+    const removeToWishlist = async (productId, token) => {
         try {
-            const wishlist = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/wishlist/remove-wishlist`,{productId},{
-                headers:{
+            const wishlist = await axios.post(`${import.meta.env.VITE_EXPRESS_BASE_URL}/wishlist/remove-wishlist`, { productId }, {
+                headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
@@ -476,40 +435,42 @@ const StoreContextProvider = ({ children }) => {
             return wishlist.data
         } catch (error) {
             console.log(error);
-            
+
             toast.error(error.response.data.error || error.response.data.message);
-            
+
         }
     }
 
-    const getWishlist = async(token) =>{
+    const getWishlist = async (token) => {
         setWishlistLoader(true)
         try {
-            const wishlist = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/wishlist/get-wishlist`,{
-                headers:{
+            const wishlist = await axios.get(`${import.meta.env.VITE_EXPRESS_BASE_URL}/wishlist/get-wishlist`, {
+                headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
             // console.log(wishlist);
-            
+
             return wishlist.data
         } catch (error) {
             console.log(error);
-            
+
             toast.error(error.response.data.error || error.response.data.message);
-            
-        }finally{
+
+        } finally {
             setWishlistLoader(false)
         }
     }
 
     const currency = "₹"
-    const contextValue = {currency, products, addToCart, wishlistLoader,
-        removeToCart, cartCounts, cartItems, loginHandler, 
-        cartTotalAmt, totalMrp, deliveryAmt, percentagedis, 
-        totalAmount, deleteCartItems,logout,auth,logoutMSg,
-        searchBtn ,showSearchBtn,setShowSearchBtn,setSearch,
-        search,addToWishlist,getWishlist,removeToWishlist,productsLoader,productsLoader}
+    const contextValue = {
+        currency, products, addToCart, wishlistLoader,
+        removeToCart, cartCounts, cartItems, loginHandler,
+        cartTotalAmt, totalMrp, deliveryAmt, percentagedis,
+        totalAmount, deleteCartItems, logout, auth, logoutMSg,
+        searchBtn, showSearchBtn, setShowSearchBtn, setSearch,
+        search, addToWishlist, getWishlist, removeToWishlist, productsLoader, productsLoader
+    }
 
     return (
         <StoreContext.Provider value={contextValue}>

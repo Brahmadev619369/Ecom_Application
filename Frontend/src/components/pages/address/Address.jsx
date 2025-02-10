@@ -10,6 +10,11 @@ import { ImBin } from "react-icons/im";
 import LoaderNew from '../../loader2/LoaderNew'
 
 function Address() {
+  useEffect(() => {
+    window.scrollTo({top:0,behavior:"smooth"});
+}, []);
+
+
   const { cartItems } = useContext(StoreContext)
   const token = localStorage.getItem("AuthToken");
   const [saveAddress, setSaveAddress] = useState([])

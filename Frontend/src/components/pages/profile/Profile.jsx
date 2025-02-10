@@ -19,7 +19,10 @@ function Profile() {
     const [user, setUser] = useState({})
     const navigate = useNavigate()
     const [isloading,setIsloading] = useState(false)
-
+  useEffect(() => {
+        window.scrollTo({top:0,behavior:"smooth"});
+    }, []);
+    
 
     const {
         register,
