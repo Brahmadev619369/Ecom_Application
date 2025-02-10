@@ -9,7 +9,7 @@ import { StoreContext } from '../../Context'
 
 
 function Login() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm()
+  const { register, handleSubmit, watch, formState: { errors },reset } = useForm()
   const [currState, setCurrState] = useState("Login")
   const [isLoading, setIsLoading] = useState(false)
   const {loginHandler} = useContext(StoreContext)
@@ -35,7 +35,7 @@ function Login() {
         navigate("/")
       }else{
         console.log(res.data.message);
-        
+        reset()
         toast.success(res.data.message)
         navigate("/login")
       }
