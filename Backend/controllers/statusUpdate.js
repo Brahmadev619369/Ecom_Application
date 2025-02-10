@@ -20,7 +20,7 @@ const sendOtpToEmail = async (email, otp) => {
     });
 
     const mailOption = {
-        from: "YourCart",
+        from: `"YourCart" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: 'Your Items Out For Delivery',
         html: `
@@ -60,7 +60,7 @@ const sendStatusToEmail = async (email, status, orderId) => {
         });
 
         const mailOptions = {
-            from: process.env.EMAIL_USER,
+            from:`"YourCart" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: `Update on Your Order #${orderId}`,
             html: `
@@ -151,39 +151,7 @@ const updateOrderStatus = async (req, res, io) => {
 }
 
 
-// verify order status 
-// const verifyStatus = async(req,res) =>{
-//     const {orderId,otp} = req.body;
-//     if(!otp){
-//         return res.status(400).send({error:"Otp Required"})
-//     }
 
-//     try {
-//         const order = await PlaceOrders.findOne({orderId:orderId})
-//     if(!order){
-//         return res.status(400).send({error:"Order not found."})
-//     }
-
-//     if (order.otp === otp) {
-//         order.orderStatus = "Delivered"
-//         order.otp = null;
-//         await order.save()
-
-//         // Notify clients that the order is delivered
-//         io.emit('orderStatusUpdate', { orderId, status: 'Delivered' });
-//         await sendStatusToEmail(order.address?.email, "Delivered",orderId)
-//         return res.json({ message: 'Order delivered successfully' });
-        
-//     } else {
-//         res.status(400).send({ error: 'Invalid OTP' })
-//     }
-
-//     } catch (error) {
-//         return res.status(500).send({
-//             error:error
-//         })
-//     }
-// }
 
 const verifyStatus = async (req, res) => {
     const { orderId, otp } = req.body;

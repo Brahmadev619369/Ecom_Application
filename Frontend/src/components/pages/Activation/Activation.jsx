@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { toast, ToastContainer } from "react-toastify"
 import "./activation.css"
+import LoaderNew from '../../loader2/LoaderNew';
+
 function Activation() {
 
   const { activationToken } = useParams()

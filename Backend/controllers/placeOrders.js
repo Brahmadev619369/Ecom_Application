@@ -249,7 +249,7 @@ const checkStatus = async (req, res) => {
 `
 
                 const mailOpt = {
-                    from: 'YourCart',
+                    from: `"YourCart" <${process.env.EMAIL_USER}>`,
                     to: this.address.email,
                     subject: "Your Order Confirmation",
                     html: ` 

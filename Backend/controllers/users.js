@@ -91,7 +91,7 @@ const registerUser = async (req, res) => {
         })
 
         const mailOption = {
-            from: '"YourCart.." <raibrahmadev508@gmail.com>',
+            from: `"YourCart" <${process.env.EMAIL_USER}>`,
             to: newEmail,
             subject: "Account Activation",
             html: `
@@ -256,7 +256,7 @@ const forgotPassword = async (req, res) => {
         })
 
         const mailOption = {
-            from: '"YourCart.." <raibrahmadev508@gmail.com>',
+            from: `"YourCart" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: "Password Reset",
             html: `
@@ -577,7 +577,7 @@ const updateUserDetails = async (req, res) => {
             });
 
             const mailOption = {
-                from: `"YourCart Support" <${process.env.EMAIL_USER}>`,
+                from: `"YourCart" <${process.env.EMAIL_USER}>`,
                 to: lowerEmail,
                 subject: "Account Verification",
                 html: `
@@ -706,7 +706,7 @@ const adminRegister = async (req, res) => {
         })
 
         const mailOption = {
-            from: '"YourCart.." <raibrahmadev508@gmail.com>',
+            from: `"YourCart" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: "Account Activation",
             html: `
