@@ -14,7 +14,7 @@ function Tc() {
             
              <div>
              <p >
-                    The terms <strong>"We" / "Us" / "Our" / "Company"</strong> refer to <strong>Kings Studio</strong>, and the terms <strong>"Visitor" / "User"</strong> refer to the users.
+                    The terms <strong>"We" / "Us" / "Our" / "Company"</strong> refer to <strong>YourCart</strong>, and the terms <strong>"Visitor" / "User"</strong> refer to the users.
                 </p>
              </div>
                 <div className="terms-content">
@@ -60,7 +60,7 @@ function Tc() {
                     <div>
                         <p><strong>Indemnity</strong></p>
                         <p>
-                            The User agrees to indemnify and hold harmless the Company and its affiliates from any claims or damages resulting from their use of <strong>kingsstudio.in</strong>.
+                            The User agrees to indemnify and hold harmless the Company and its affiliates from any claims or damages resulting from their use of <strong>yourcart-frontend.vercel.app</strong>.
                         </p>
                     </div>
 

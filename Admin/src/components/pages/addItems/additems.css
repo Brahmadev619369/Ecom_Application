@@ -104,7 +104,26 @@
     font-weight: bold;
 }
 
+.stockInput input{
+    padding: 8px 10px;
+    width: 80px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
 
+.addSizeStockBtn div{
+background-color: rgb(178, 136, 136);
+width: 100px;
+text-align: center;
+padding: 5px 10px;
+border-radius: 10px;
+cursor: pointer;
+transition: all 0.3s;
+}
+.addSizeStockBtn div:hover{
+    background-color: rgb(249, 115, 115);
+    }
 /* category */
 .categories {
     display: flex;

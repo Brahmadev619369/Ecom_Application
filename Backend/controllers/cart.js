@@ -8,17 +8,22 @@ const addToCart = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(productId)) {
         return res.status(400).json({ message: "Invalid product ID" });
     }
- 
-
-
-
 
     try {
         const product = await Products.find({_id:productId});
+        
         if (!product) {
             return res.status(404).json({ message: "Product not found" });
         }
-        const availableQty = product[0]?.inStock;
+        
+        let availableQty;
+        product[0]?.sizes.map((sizeObj)=>{
+            if(sizeObj.size === size){
+                // console.log(sizeObj.stock);
+                availableQty = sizeObj.stock
+                
+            } 
+        })
 
 
         if (!availableQty || availableQty === 0 || availableQty < quantity) {

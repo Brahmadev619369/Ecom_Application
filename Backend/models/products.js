@@ -25,14 +25,14 @@ const productSchema = mongoose.Schema({
           type:Number,
         require:true
     },
-    inStock:{
-        type:Number,
-      require:true
-  },
-    sizes:{
-        type:Array,
-        require:true
-    },
+//     inStock:{
+//         type:Number,
+//       require:true
+//   },
+    sizes:[{
+        size:{type:String,require:true},
+        stock:{type:Number,require:true,default:0}  
+    }],
     image:{
         type:Array,
         require:true

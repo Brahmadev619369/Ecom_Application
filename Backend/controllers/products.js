@@ -1,12 +1,16 @@
+const { json } = require("body-parser");
 const Products = require("../models/products");
 const { uploadOnCloudinary } = require("../utils/cloudinary");
 const moment = require("moment")
 
 const addProducts = async (req, res) => {
-    const { name, description, price, mrp, sizes, category, subCategory, bestSeller,inStock } = req.body;
-    if (!name || !description || !price || !mrp || !sizes || !category || !subCategory || !bestSeller || !inStock) {
+    const { name, description, price, mrp, category, subCategory, bestSeller } = req.body;
+    const sizes = JSON.parse(req.body.sizes || "[]");
+
+    if (!name || !description || !price || !mrp || !category || !subCategory || !bestSeller) {
         return res.status(400).send({ error: "All fields are require." })
     }
+    
 
     if (!req.files) {
         return res.status(400).send({ error: "Atleast one image require." })
@@ -15,6 +19,7 @@ const addProducts = async (req, res) => {
     if (!req.files.length > 4) {
         return res.status(400).send({ error: "only four images are allowed." })
     }
+
     try {
         let imgUrl = []
         for (const file of req.files) {
@@ -22,6 +27,7 @@ const addProducts = async (req, res) => {
             imgUrl.push(imgDetails.url);
 
         }
+        
 
 
         const response = await Products.create({
@@ -34,8 +40,10 @@ const addProducts = async (req, res) => {
             subCategory: subCategory,
             bestseller: bestSeller,
             image: imgUrl,
-            inStock :inStock
+            // inStock :inStock
         })
+
+        
 
         res.status(200).send({
             message: "Product Successfully Added.",
@@ -55,8 +63,6 @@ const fetchProducts = async(req,res) =>{
     
     try {
         const response = await Products.find().sort({"createdAt":-1})
-        console.log(response);
-        
         return res.status(200).send(response)
 
     } catch (error) {
@@ -93,6 +99,8 @@ const deleteProduct = async(req,res) =>{
         })
     }
 }
+
+
 
 module.exports = {
     addProducts,

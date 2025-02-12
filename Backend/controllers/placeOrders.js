@@ -16,7 +16,7 @@ const generateTranscId = () => {
     return "T" + Date.now()
 }
 
-const generateInvoiceNumber = async() =>{
+const generateInvoiceNumber = async () => {
     const totalOrders = await PlaceOrders.countDocuments()
     return `24-24/${totalOrders + 1}`
 }
@@ -185,23 +185,23 @@ const checkStatus = async (req, res) => {
                     return res.status(400).json({ msg: "Order not found", status: "error" });
                 }
 
-                const updatedNewStock = recentPlacedOrd?.items?.map(item => {
-                    const productId = item?._id;
+                const updatedNewStock = recentPlacedOrd?.items?.map(async (item) => {
+                    const productId = item?._id
                     const qtyToBuy = item?.qty;
+                    const sizeToBuy = item?.size;
 
-                    console.log("qtyToBuy", qtyToBuy);
-                    console.log("pid", productId);
+                    console.log("Updating stock for product:", productId, "Size:", sizeToBuy, "Quantity:", qtyToBuy);
 
-                    return Products.findByIdAndUpdate(
-                        productId,
-                        { $inc: { inStock: -qtyToBuy } },
+                    return Products.findOneAndUpdate(
+                        { _id: productId, "sizes.size": sizeToBuy },
+                        { $inc: { "sizes.$.stock": -qtyToBuy } },
                         { new: true }
-                    )
-                })
+                    );
+                });
 
-                await Promise.all(updatedNewStock)
+                await Promise.all(updatedNewStock.filter(Boolean));
 
-
+                
                 // send order confirmation to user email 
                 const orderSummaryHtml = `
   <div style="width: 100%; overflow-x: auto;">

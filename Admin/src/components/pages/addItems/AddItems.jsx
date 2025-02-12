@@ -16,23 +16,42 @@ function AddItems() {
         images: [],
         category: "Men",
         subCategory: "Topwear",
-        inStock: ""
     };
 
     const [productData, setProductData] = useState(initialProductData);
-
-
     const [loader, setLoader] = useState(false)
     const [bestSeller, setBestSeller] = useState(false)
     const [sizes, setSizes] = useState([])
     const [previewImg, setPreviewImg] = useState([])
     const { auth } = useContext(storeContext)
-
+    const [size, setSize] = useState("")  // this is only store size
+    const [stock, setStock] = useState(0)   // this is only store stock
     if (auth?.role === "Worker") {
         return <Navigate to="/login" />
     }
 
-    // console.log(productData);
+
+    // add new size
+    const addSize = (size, stock) => {
+        if (!size || stock < 0) {
+            toast.error("Please select a size and enter valid stock quantity.")
+            return;
+        }
+
+        //prevt duplicate
+        if (sizes.some((s) => s.size === size)) {
+            toast.error("size already added!")
+            return
+        };
+
+        setSizes([...sizes, { size: size, stock: Number(stock) }])
+    }
+
+sizes.forEach(size=>{
+    console.log(size);
+    
+})
+console.log(sizes);
 
 
 
@@ -76,9 +95,13 @@ function AddItems() {
         data.append("category", productData.category)
         data.append("subCategory", productData.subCategory)
         data.append("bestSeller", bestSeller)
-        data.append("inStock", productData.inStock)
 
-        sizes.forEach((size) => data.append("sizes[]", size))
+        // sizes.forEach((size) => data.append("sizes{}", size))
+        if (Array.isArray(sizes) && sizes.length > 0) {
+            data.append("sizes", JSON.stringify(sizes));
+        } else {
+            data.append("sizes", JSON.stringify([])); // Send an empty array if no sizes
+        }
 
         productData.images.forEach((image) => data.append("image", image))
 
@@ -101,6 +124,8 @@ function AddItems() {
 
 
 
+console.log(size);
+console.log(stock)
 
     return (
         <div className='addItemsMainContainer'>
@@ -154,11 +179,36 @@ function AddItems() {
                     </div>
 
                     <div className="sizesContainer flex-col">
-                        <label htmlFor="">Sizes</label>
+                        <label htmlFor="">Sizes & Stock</label>
                         <div className="sizes">
 
+                            {/* <select name="" id="sizeSelect">
+                                <option value="">Select Size</option>
+
+                                ["S", "M", "L", "XL", "XXL"]
+
+                            </select> */}
 
                             {
+                                ["S", "M", "L", "XL", "XXL"].map((s,index)=>{
+                                    return(
+                                    <div className="size" key={index}>
+                                        <p
+                                            className={`${size===s ? "selectedSize" : ""}`}
+                                           onClick={()=>setSize(s)}>
+                                            {s}
+                                        </p>
+                                    </div>)
+                                })
+                            }
+
+
+
+
+
+
+
+                            {/* {
                                 ["S", "M", "L", "XL", "XXL"].map((size, index) => (
                                     <div className="size" key={index}>
                                         <p
@@ -168,8 +218,15 @@ function AddItems() {
                                         </p>
                                     </div>
                                 ))
-                            }
+                            } */}
                         </div>
+                        <div className="stockInput">
+    <input type="number" value={stock} onChange={(e)=>setStock(e.target.value)} />
+</div>
+
+<div className="addSizeStockBtn">
+    <div onClick={()=>addSize(size,stock)}>Add Sizes</div>
+</div>
 
                     </div>
 

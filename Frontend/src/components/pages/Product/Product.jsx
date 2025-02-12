@@ -19,7 +19,9 @@ function Product() {
   const { products, currency, addToCart, cartItems, addToWishlist, getWishlist, removeToWishlist } = useContext(StoreContext)
   const [productData, setProductData] = useState(false)
   const [image, setImage] = useState("")
+  // both size and stock indivisible
   const [size, setSize] = useState("")
+  const [stock,setStock] = useState("")
   const [showDescription, setShowDecription] = useState(false)
   const [wishlist, setWishlist] = useState([])
   const [iswishlisted, setIswishlisted] = useState(false)
@@ -59,7 +61,7 @@ function Product() {
     return Math.round(((mrp - price) / mrp) * 100, 2)
   }
 
-  const disableAddToCartBtn = (inStock) => inStock <= 0;
+  const disableAddToCartBtn = (st) => st <= 0;
 
 
 
@@ -97,6 +99,20 @@ function Product() {
   };
 
 
+  const handleAddSizeAndStock = (sz,st) =>{
+    setSize(sz)
+    setStock(st)
+  }
+
+console.log(size,stock)
+
+
+// productData.sizes.forEach((item)=>{
+//   console.log(item.size)
+// })
+
+
+
   return (
     <div className="ProductDetailsMainContainer">
       {
@@ -120,7 +136,7 @@ function Product() {
           <div className="mainImage">
             <img src={image} />
             {
-              productData?.inStock === 0 && <div className="outOfStockOverlay">
+              stock === 0 && <div className="outOfStockOverlay">
                 <div className="outOfStock">
                   <p>Out of stock</p>
                 </div>
@@ -164,20 +180,22 @@ function Product() {
               productData &&
               productData.sizes.map((item, index) => {
                 return (
-                  <div onClick={() => setSize(item)} className={`size ${size === item ? "selectedSize" : ""}`} key={index}>{item}</div>
+                  <div onClick={() => handleAddSizeAndStock(item?.size,item?.stock)} className={`size ${size === item.size ? "selectedSize" : ""}`} key={index}>
+                    {item?.size}
+                    </div>
                 )
 
               })
             }
           </div>
           <div className="addToCartBtn">
-            <button onClick={() => addToCart(productId, size)} disabled={disableAddToCartBtn(productData.inStock)} className='cartBtn'>ADD TO CART</button>
+            <button onClick={() => addToCart(productId,size)} disabled={disableAddToCartBtn(stock)} className='cartBtn'>ADD TO CART</button>
           </div>
 
           {
-            productData?.inStock >= 1 && productData?.inStock <= 5 && (
+            stock >= 1 && stock <= 5 && (
               <div className="herryupmsg">
-                <p>{`Hurry up, only ${productData?.inStock} left!`}</p>
+                <p>{`Hurry up, only ${stock} left!`}</p>
               </div>
             )
           }
