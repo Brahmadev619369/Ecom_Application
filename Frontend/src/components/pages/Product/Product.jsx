@@ -21,7 +21,7 @@ function Product() {
   const [image, setImage] = useState("")
   // both size and stock indivisible
   const [size, setSize] = useState("")
-  const [stock,setStock] = useState(1)
+  const [stock,setStock] = useState()
   const [showDescription, setShowDecription] = useState(false)
   const [wishlist, setWishlist] = useState([])
   const [iswishlisted, setIswishlisted] = useState(false)
@@ -189,7 +189,7 @@ console.log(size,stock)
             }
           </div>
           <div className="addToCartBtn">
-            <button onClick={() => addToCart(productId,size)} disabled={disableAddToCartBtn(stock)} className='cartBtn'>ADD TO CART</button>
+            <button onClick={() => addToCart(productId,size)} disabled={disableAddToCartBtn(stock || 1)} className='cartBtn'>ADD TO CART</button>
           </div>
 
           {
