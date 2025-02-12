@@ -9,6 +9,8 @@ function Product({ id, img, name, price, mrp, inStock }) {
   const { currency,products } = useContext(StoreContext)
   const discountPercentage = Math.round(((mrp - price) / mrp) * 100, 2)
 
+  console.log("stock",inStock)
+
   return (<>
 
     <Link className='productCard' to={`/product/${id}`} key={id}>

@@ -28,7 +28,7 @@ function BestSellers() {
     <div className="collectionContainer">
       {
         bestSellers.map((item,index)=>(
-          <Product key={index} name = {item.name} img  = {item.image} price = {item.price} id={item._id} mrp={item.Mrp} inStock = {item.inStock}/>
+          <Product key={index} name = {item.name} img  = {item.image} price = {item.price} id={item._id} mrp={item.Mrp} inStock = {item?.sizes?.[0].stock}/>
         ))
       }
     </div>

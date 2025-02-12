@@ -21,7 +21,7 @@ function Product() {
   const [image, setImage] = useState("")
   // both size and stock indivisible
   const [size, setSize] = useState("")
-  const [stock,setStock] = useState("")
+  const [stock,setStock] = useState(1)
   const [showDescription, setShowDecription] = useState(false)
   const [wishlist, setWishlist] = useState([])
   const [iswishlisted, setIswishlisted] = useState(false)
