@@ -12,43 +12,23 @@
 .chat-toggle-btn {
     background: coral;
     color: white;
-    border: 5px solid green; /* Initial border */
     width: 55px;
     height: 55px;
     border-radius: 50%;
+    align-items: center;
     font-size: 26px;
     cursor: pointer;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
     transition: all 0.3s ease;
-    animation: rotateBtn 2s infinite linear, borderColorChange 2s infinite linear;
 }
 
-@keyframes rotateBtn {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
-@keyframes borderColorChange {
-    0% {
-        border-color: rgb(203, 215, 203);
-    }
-    25% {
-        border-color: rgb(211, 166, 110);
-    }
-    50% {
-        border-color: rgb(227, 147, 49);
-    }
-    75% {
-        border-color: rgb(214, 136, 41);
-    }
-    100% {
-        border-color: coral
-    }
-}
 
 
 .chat-toggle-btn:hover {

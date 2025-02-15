@@ -25,8 +25,14 @@ const chatbotController = async (req, res) => {
     if (/hey|(hii|hi)|hello/i.test(lowerMessage)) {
         responseMessage = `Hey! How can I help you today? 😊🚀`;
     }
+    if (/buy|(by|bye)|byee/i.test(lowerMessage)) {
+        responseMessage = `Bye! 🚀 Have a great day 😊🚀`;
+    }
     if (/what is (your|ur) name/i.test(lowerMessage)) {
         responseMessage = `👋 Hi, I'm YourCart Assistant! I don't have name! I trained by yourcart! I'm a chatbot.`;
+    }
+    if (/how (are|r) (you|u)?/i.test(lowerMessage)) {
+        responseMessage = `I'm doing great! Thanks for asking. 😊 How about you?`;
     }
     // Order status check
     else if (/order status|where is my order/i.test(lowerMessage)) {
@@ -37,44 +43,76 @@ const chatbotController = async (req, res) => {
     // Order details check
     else if (/order details|last order/i.test(lowerMessage)) {
         responseMessage = lastOrder && lastOrder.items?.length > 0
-            ? `Your last order: ${lastOrder.items.map(item => item.name).join(", ")}`
+            ? `<b style="margin-bottom:7px;">Your last order:</b><br/>${lastOrder.items.map(item =>
+                // item.name).join(", ")}`
+                `<div style="margin-bottom:7px;">🚀 ${item.name} - <b>₹${item.price}</b> - <span style="font-size:13px;">${item.qty} qty</span></div><hr>`).join("\n")}</div>`
             : "You haven't placed any orders yet.";
     }
-    else if (/order history/i.test(message)) {
+    else if (/order history|orders history|tell me my (order|orders) history/i.test(message)) {
         const orders = await PlaceOrders.find({ userId }).limit(5);
         responseMessage = orders.length
-            ? `Here are your last few orders: ${orders.map((o) => o.items.map((i) => i.name).join(", ")).join(" | ")}`
+            ? `Here are your last few orders: ${orders.map((o) => o.items.map((i) => `<div style="margin-bottom:7px;">🚀 ${i.name}`)).join("")}`
             : "You have no past orders.";
 
     } else if (/cancel order|cancel my order/i.test(message)) {
         responseMessage = "To cancel an order, visit 'My Orders' and request a cancellation.";
 
-    } else if (/product|category/i.test(message)) {
-        const products = await Products.find({}).limit(5);
-        responseMessage = products.length
-            ? `Here are some products: ${products.map((p) => p.name).join(", ")}`
-            : "No products found.";
-
-    } else if (/price/i.test(message)) {
+    } else if (/price|show products under/i.test(message)) {
         const match = message.match(/\d+/g);
         if (match && match[0]) {
             const minPrice = Number(match[0]);
             const maxPrice = match.length > 1 ? Number(match[1]) : minPrice + 50;
-    
+
             const products = await Products.find({ price: { $gte: minPrice, $lte: maxPrice } }).limit(5);
-    
+
             responseMessage = products.length
-                ? `<b>Products in your range:</b><br/><ul>${products.map((p) => 
-                    `<li><b>${p.name}</b> - $${p.price}</li>`).join("")}</ul>`
+                ? `<b style="margin-bottom:7px;">Products in your range:</b><br/><div>${products.map((p) =>
+                    `<div style="margin-bottom:7px;">🚀 ${p.name} - <b>₹${p.price}</b> - <span style="font-size:13px;">${p.category}</span></div><hr>`).join("\n")}</div>`
                 : "No products found in this price range.";
         } else {
             responseMessage = "Please specify a price range (e.g., 'show products under 50').";
         }
+    }    else if (/(men|mens) (product|products)|(women|womens) (product|products)|category/i.test(message)) {
+        const men = message.toLowerCase().includes("men");
+        const women = message.toLowerCase().includes("women");
+
+        let filter = {};
+
+        if (men) {
+            filter = { category: "Men" };
+        } else if (women) {
+            filter = { category: "Women" };
+        }
+
+        // Use `aggregate()` to fetch 5 random products
+        const products = await Products.aggregate([
+            { $match: filter },
+            { $sample: { size: 5 } }
+        ]);
+
+
+        responseMessage = products.length
+            ? `<b style="margin-bottom:7px;">Products:</b><br/>${products.map((p) =>
+                `<div style="margin-bottom:7px;">🚀 ${p.name} - <b>₹${p.price}</b> - <span style="font-size:13px;">${p.subCategory}</span></div><hr>`).join("\n")}`
+            : "No products found.";
     }
-    
+     else if (/product|category/i.test(message)) {
+        const keyword = message.match(/product|category\s*(\w+)/i);
+        const searchTerm = keyword ? keyword[1] : "";
+
+        const filter = searchTerm ? { category: { $regex: searchTerm, $options: "i" } } : {};
+
+        const products = await Products.aggregate([{ $match: filter }, { $sample: { size: 5 } }]);
+
+
+        responseMessage = products.length
+            ? `<b style="margin-bottom:7px;">Products:</b><br/>${products.map((p) =>
+                `<div style="margin-bottom:7px;">🚀 ${p.name} - <b>₹${p.price}</b> - <span style="font-size:13px;">${p.category}</span></div><hr>`).join("\n")}`
+            : "No products found.";
+    }
     else if (/What is the return policy?|return policy?/i.test(lowerMessage)) {
         responseMessage = "You can return items within 7 days."
-    } 
+    }
     else if (/Do you offer cash on delivery?|cash on delivery?|cod/i.test(lowerMessage)) {
         responseMessage = "No, Curently we are not dealing with COD method";
     }
@@ -128,7 +166,7 @@ const chatbotController = async (req, res) => {
     }
     else if (/What if I receive a damaged product?|damaged product?/i.test(lowerMessage)) {
         responseMessage = "If you receive a damaged product, contact our support team within 24 hours for a replacement or refund.";
-    }else if (/why (u|you) (are|r) here|what is (your|ur) work/i.test(lowerMessage)) {
+    } else if (/why (u|you) (are|r) here|what is (your|ur) work/i.test(lowerMessage)) {
         responseMessage = "I'm here to help you.";
     }
     else if (/thank|thank (you|u)|thanks/i.test(lowerMessage)) {

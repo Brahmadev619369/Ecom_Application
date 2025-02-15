@@ -55,7 +55,8 @@ function Chatbot() {
                     <div className="message-box">
                         {messages.map((msg, index) => (
                             <div className={`message ${msg.sender}`} key={index}>
-                                {msg.text}
+                                {/* {msg.text} */}
+                                <div dangerouslySetInnerHTML={{ __html: msg.text }} />
                             </div>
                         ))}
 
