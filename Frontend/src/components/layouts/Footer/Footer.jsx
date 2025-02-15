@@ -39,8 +39,8 @@ function Footer() {
         <div className="thirdSection">
           <h2>GET IN TOUCH</h2>
           <div className="contact">
-            <p>+91-9594670206</p>
-            <p>raibrahmadev601@gmail.com</p>
+            <p>+91-XXXXXX0206</p>
+            <p>raibrahmadev508@gmail.com</p>
           </div>
         </div>
       </div>
