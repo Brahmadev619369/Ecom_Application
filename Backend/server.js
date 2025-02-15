@@ -12,6 +12,7 @@ const addProductsRoute = require("./routes/products")
 const statusRoute = require("./routes/statusUpdate")
 const subscribeRoute = require("./routes/subscribe")
 const wishlistRoute = require("./routes/wishlist")
+const chatbotRoute = require("./routes/chatbot")
 const ConnectToDb = require("./configs/connection");
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -73,6 +74,7 @@ app.use("/api",statusRoute)
 app.use("/api",invoiceRoute)
 app.use("/api",subscribeRoute)
 app.use("/api/wishlist",wishlistRoute)
+app.use("/api",chatbotRoute)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

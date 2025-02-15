@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import "./contact.css"
 import LoaderNew from '../../loader2/LoaderNew'
-
+import Chatbot from '../../chatbot/Chatbot'
 function Contact() {
   const { register, handleSubmit } = useForm()
 const token = localStorage.getItem("AuthToken")
@@ -30,7 +30,7 @@ const token = localStorage.getItem("AuthToken")
     finally{
       setIsloading(false)
     }
-  } 
+  }
 
 
   return (
@@ -40,6 +40,7 @@ const token = localStorage.getItem("AuthToken")
         <h2 className='playfair-display-font'>Contact Us</h2>
         <div className="line1"></div>
       </div>
+
 {
   isloading && <LoaderNew/>
 }
@@ -69,7 +70,6 @@ const token = localStorage.getItem("AuthToken")
           <div className="BtnText">
             <input className="submitBtn" type="submit" />
           </div>
-
         </form>
       </div>
 

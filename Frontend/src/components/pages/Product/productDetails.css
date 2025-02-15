@@ -139,8 +139,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 30px;
-    height: 30px;
+    width: 31px;
+    height: 31px;
     padding: 8px;
     text-align: center;
     border-radius: 2px;
@@ -154,7 +154,7 @@
 }
 
 .selectedSize{
-    border: 2px solid rgb(0, 191, 255);
+    border: 2px solid rgb(222, 138, 28);
 }
 
 .addToCartBtn{

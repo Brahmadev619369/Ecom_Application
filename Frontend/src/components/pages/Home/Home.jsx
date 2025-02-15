@@ -5,6 +5,7 @@ import BestSellers from '../../bestSellers/BestSellers'
 import "./home.css"
 import ContactSupport from '../../contactSupport/ContactSupport'
 import Subscribe from '../../subscribe/Subscribe'
+import Chatbot from '../../chatbot/Chatbot'
 
 function Home() {
   useEffect(() => {
