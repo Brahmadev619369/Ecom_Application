@@ -4,6 +4,7 @@ import Footer from './footer/Footer'
 import { Navigate, Outlet } from 'react-router-dom';
 import SideBar from './sidebar/SideBar';
 import { storeContext } from './context/context';
+import Tawl from './tawkIO/Tawl'
 function Layout() {
 
     const {isAuthenticated,loading,auth } = useContext(storeContext)
@@ -35,6 +36,9 @@ function Layout() {
     </div>
   
     <Footer/>
+
+<Tawl/>
+    
     </div >
   )
 }

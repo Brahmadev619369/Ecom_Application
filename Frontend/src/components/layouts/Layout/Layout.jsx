@@ -6,6 +6,7 @@ import SearchBar from '../../searchBar/SearchBar'
 import { ToastContainer } from 'react-toastify';
 import { StoreContext } from '../../Context'
 import Chatbot from '../../chatbot/Chatbot'
+import Tawl from '../../tawkIO/Tawl'
 function Layout() {
   const {showSearchBtn} = useContext(StoreContext)
   
@@ -17,11 +18,13 @@ useEffect(()=>{
     <>
     <Header/>
     <div className="MainContentContainer">
-    <Chatbot/>
+    {/* <Chatbot/> */}
     <ToastContainer/>
     <Outlet/>
     </div>
     <Footer/>
+
+    <Tawl/>
     </>
   )
 }
